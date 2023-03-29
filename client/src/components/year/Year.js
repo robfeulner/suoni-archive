@@ -6,6 +6,11 @@ const Year = () => {
   const [year, setYear] = useState(null);
   const [artists, setArtists] = useState(null);
 
+  //Indexing for pagination
+  const [page, setPage] = useState(1);
+  const startIndex = (page - 1) * 25;
+  const endIndex = startIndex + 25;
+
   useEffect(() => {
     fetch(`/get-events`)
       .then((res) => res.json())
@@ -16,14 +21,11 @@ const Year = () => {
         setArtists(data.data);
         // console.log(artists);
       })
+
       .catch((error) => {
         console.log(error);
       });
-  }, []);
-
-  //.filter needs to access the date, and there should be an if condition on date to include 2006
-  //then in the .filter, do a .map for "artist", you MIGHT have to do a .map to get the names within "artist"
-  //then a .sort to get them in alphabetical order.
+  }, [page]);
 
   return (
     <>
@@ -31,23 +33,47 @@ const Year = () => {
         <></>
       ) : (
         <>
-        <Wrapper>
-            <EventWrapper >
-          {artists
-            .filter((event) => event.year === year)
-            .map((event) =>
-            event.events.map((event) => (
-                <div key={event._id}>
-                  <h3>{event.artist.join(" + ")}</h3>
-                  <p>{event.date}</p>
-                  <p>{event.venue}</p>
-                  <p>{event.price}</p>
-                  </div>
+          <Wrapper>
+            {/* {console.log(
+              artists
+                .filter((event) => event.year === year)
+                .slice(startIndex, endIndex)[0].events
+            )} */}
+            <EventWrapper>
+              {artists
+                .filter((event) => event.year === year)
+
+                .map((event) =>
+                  event.events.slice(startIndex, endIndex).map((event) => (
+                    <div key={event._id}>
+                      <h3>{event.artist.join(" + ")}</h3>
+                      <p>{event.date}</p>
+                      <p>{event.venue}</p>
+                      <p>{event.price}</p>
+                    </div>
                   ))
-                  )}
-                  </EventWrapper>
-              <YearList year={year} setYear={setYear} artists={artists}/>
-        </Wrapper>
+                )}
+            </EventWrapper>
+            <div>
+              {/* <button onClick={() => setPage(1)}>Page 1</button> */}
+              <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+                Previous Page
+              </button>
+              {page}
+              <button
+                disabled={endIndex >= artists[0].events.length}
+                onClick={() => setPage(page + 1)}
+              >
+                Next Page
+              </button>
+            </div>
+            <YearList
+              year={year}
+              setYear={setYear}
+              artists={artists}
+              setPage={setPage}
+            />
+          </Wrapper>
         </>
       )}
     </>
@@ -55,12 +81,12 @@ const Year = () => {
 };
 
 const Wrapper = styled.div`
-display: flex;
-`
+  display: flex;
+`;
 
 const EventWrapper = styled.div`
-display: flex;
-flex-direction: column;
-`
+  display: flex;
+  flex-direction: column;
+`;
 
 export default Year;

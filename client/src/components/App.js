@@ -4,7 +4,10 @@ import Header from "./header and footer/Header";
 import Footer from "./header and footer/Footer";
 import Home from "../home/Home";
 import Artists from "./artists/Artists";
+import Artist from "./artists/Artist";
+import Event from "./events/Event";
 import Year from "./year/Year";
+import Venues from "./venues/Venues";
 import GlobalStyles from "./global/GlobalStyles";
 
 const App = () => {
@@ -18,11 +21,11 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/artists" element={<Artists />} />
-              <Route path="/artist/:artistId" />
-              <Route path="/event/:eventId" />
+              <Route path="/artist/:artistId" element={<Artist />} />
+              <Route path="/events/:eventId" element={<Event />} />
               <Route path="/years/:artistId" />
-              <Route path="/years/" element={<Year/>} />
-              <Route path="/events/eventId" />
+              <Route path="/years/" element={<Year />} />
+              <Route path="/venues/" element={<Venues />} />
             </Routes>
           </div>
           <Footer />

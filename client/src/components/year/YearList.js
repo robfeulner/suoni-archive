@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import Year from "./Year";
 
-const YearList = ({ year, setYear, artists }) => {
+
+const YearList = ({ year, setYear, artists, setPage }) => {
   const handleClick = (event) => {
     setYear(parseInt(event.target.innerText));
+    setPage(1);
   };
-
-  console.log(year)
 
   return (
     <>

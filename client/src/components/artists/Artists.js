@@ -1,9 +1,15 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import LettersList from "./LettersList";
+import { Link } from "react-router-dom";
 
 const Artists = () => {
-    
+  //Applying data
   const [artists, setArtists] = useState(null);
+  //Removing "The" for the alphabetical order
+  const [noThe, setNoThe] = useState(null);
+  //Choosing your letter
+  const [letter, setLetter] = useState("");
 
   useEffect(() => {
     fetch(`/get-events`)
@@ -12,8 +18,35 @@ const Artists = () => {
         if (data.status === 400 || data.status === 500) {
           throw new Error("Not good. Error.");
         }
-        setArtists(data.data);
-        // console.log(artists);
+
+        let allArtists = [];
+        const rearrangedArtists = data.data.map((ev) => {
+          return ev.events.map((item) => {
+            allArtists.push(...item.artist);
+          });
+        });
+        const uniqueArtists = [...new Set(allArtists)];
+        const noTheArray = uniqueArtists
+          .map((name) => {
+            if (name.includes("The ")) {
+              return name.slice(4);
+            } else {
+              return name;
+            }
+          })
+          .sort();
+
+        const yesTheArraySorted = noTheArray.map((name) => {
+          const nameWithThe = "The " + name;
+
+          if (uniqueArtists.includes(nameWithThe)) {
+            return nameWithThe;
+          } else {
+            return name;
+          }
+        });
+
+        setArtists(yesTheArraySorted);
       })
       .catch((error) => {
         console.log(error);
@@ -30,23 +63,36 @@ const Artists = () => {
         <></>
       ) : (
         <>
-          {artists
-            .filter((event) => event.year === 2006)
-            .map((event) =>
-              event.events.map((event) => (
-                <div key={event._id}>
-                  <h3>{event.artist.join(" + ")}</h3>
-                  <p>{event.date}</p>
-                  <p>{event.venue}</p>
-                  <p>{event.price}</p>
-                </div>
-              ))
-            )}
-                   
+          <Wrapper>
+            <ArtistWrapper>
+              {artists
+                .filter((name) => name.startsWith(letter))
+                .map((name) => (
+                  <div>
+                    <Link to={`/artist/${name}`}>{name}</Link>
+                  </div>
+                ))}
+            </ArtistWrapper>
+            <LettersList
+              artists={artists}
+              setArtists={setArtists}
+              letter={setLetter}
+              setLetter={setLetter}
+            />
+          </Wrapper>
         </>
       )}
     </>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+`;
+
+const ArtistWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export default Artists;
