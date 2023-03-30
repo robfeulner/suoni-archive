@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import YearList from "./YearList";
+import { Link } from "react-router-dom";
 
 const Year = () => {
   const [year, setYear] = useState(null);
@@ -34,11 +35,6 @@ const Year = () => {
       ) : (
         <>
           <Wrapper>
-            {/* {console.log(
-              artists
-                .filter((event) => event.year === year)
-                .slice(startIndex, endIndex)[0].events
-            )} */}
             <EventWrapper>
               {artists
                 .filter((event) => event.year === year)
@@ -46,7 +42,9 @@ const Year = () => {
                 .map((event) =>
                   event.events.slice(startIndex, endIndex).map((event) => (
                     <div key={event._id}>
-                      <h3>{event.artist.join(" + ")}</h3>
+                      <Link to={`/events/${event._id}`}>
+                        <h3>{event.artist.join(" + ")}</h3>
+                      </Link>
                       <p>{event.date}</p>
                       <p>{event.venue}</p>
                       <p>{event.price}</p>

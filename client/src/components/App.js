@@ -9,6 +9,8 @@ import Event from "./events/Event";
 import Year from "./year/Year";
 import Venues from "./venues/Venues";
 import Venue from "./venues/Venue";
+import Workshops from "./workshops/Workshops";
+import Workshop from "./workshops/Workshop";
 import GlobalStyles from "./global/GlobalStyles";
 
 const App = () => {
@@ -28,6 +30,8 @@ const App = () => {
               <Route path="/years/" element={<Year />} />
               <Route path="/venues/" element={<Venues />} />
               <Route path="/venues/:venueId" element={<Venue />} />
+              <Route path="/workshops/" element={<Workshops />} />
+              <Route path="/workshops/:workshopId" element={<Workshop />} />
             </Routes>
           </div>
           <Footer />

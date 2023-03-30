@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 const Header = () => {
   return (
@@ -15,10 +16,11 @@ const Header = () => {
         <Link to="/venues">
           <h2>Venues</h2>
         </Link>
-        <Link to="">
+        <Link to="/workshops">
           <h2>Workshops</h2>
         </Link>
       </Links>
+      <SearchBar/>
     </Wrapper>
   );
 };

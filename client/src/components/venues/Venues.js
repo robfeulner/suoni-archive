@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Venues = () => {
-  const [venueRoute, setVenueRoute] = useState(null);
+  
   const [venue, setVenue] = useState(null);
 
   useEffect(() => {
