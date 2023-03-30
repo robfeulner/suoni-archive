@@ -14,7 +14,7 @@ const { v4: uuidv4 } = require("uuid");
 
 // returns an array of all events
 const getEvents = async (req, res) => {
-    const _id = req.params.events;
+  const _id = req.params.events;
   try {
     const client = new MongoClient(MONGO_URI, options);
     await client.connect();
@@ -45,7 +45,16 @@ const getWorkshops = async (req, res) => {
   }
 };
 
+// Get all the collections of this MongoDB project
+const getCollections = () => {
+  const events = db.collection("events"); // Items collection
+  const workshops = db.collection("workshops"); // Companies collection
+
+  return { events, workshops };
+};
+
 module.exports = {
   getEvents,
   getWorkshops,
+  getCollections,
 };
