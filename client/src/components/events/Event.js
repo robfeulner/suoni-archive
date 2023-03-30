@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 const Event = () => {
   const [artists, setArtists] = useState(null);
   const { eventId } = useParams();
-  console.log(eventId);
+  
 
   //Allows me to look through out all the years in my data
 

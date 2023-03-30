@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Venues = () => {
-  const [artists, setArtists] = useState(null);
+  const [venueRoute, setVenueRoute] = useState(null);
   const [venue, setVenue] = useState(null);
 
   useEffect(() => {
@@ -12,8 +13,14 @@ const Venues = () => {
         if (data.status === 400 || data.status === 500) {
           throw new Error("Not good. Error.");
         }
-        setArtists(data.data);
-        // console.log(artists);
+        console.log(data.data);
+        const venueNames = data.data.flatMap((year) =>
+          year.events.map((event) => event.venue)
+        );
+        const uniqueVenues = [...new Set(venueNames)];
+        const sortedUniqueVenues = uniqueVenues.sort();
+
+        setVenue(sortedUniqueVenues);
       })
 
       .catch((error) => {
@@ -23,9 +30,32 @@ const Venues = () => {
 
   return (
     <>
-      <h1>hello</h1>
+      {!venue ? (
+        <></>
+      ) : (
+        <>
+          <Wrapper>
+            <ArtistWrapper>
+              {venue.map((name) => (
+                <div>
+                  <Link to={`/venues/${name}`}>{name}</Link>
+                </div>
+              ))}
+            </ArtistWrapper>
+          </Wrapper>
+        </>
+      )}
     </>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+`;
+
+const ArtistWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export default Venues;

@@ -8,6 +8,7 @@ import Artist from "./artists/Artist";
 import Event from "./events/Event";
 import Year from "./year/Year";
 import Venues from "./venues/Venues";
+import Venue from "./venues/Venue";
 import GlobalStyles from "./global/GlobalStyles";
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
               <Route path="/years/:artistId" />
               <Route path="/years/" element={<Year />} />
               <Route path="/venues/" element={<Venues />} />
+              <Route path="/venues/:venueId" element={<Venue />} />
             </Routes>
           </div>
           <Footer />

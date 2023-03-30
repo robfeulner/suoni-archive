@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 const YearList = ({ year, setYear, artists, setPage }) => {
   const handleClick = (event) => {
     setYear(parseInt(event.target.innerText));
@@ -14,13 +13,11 @@ const YearList = ({ year, setYear, artists, setPage }) => {
       ) : (
         <>
           <Wrapper>
-            {artists
-              .filter((years) => years.year)
-              .map((years) => (
-                <div key={years._id}>
-                  <YearText onClick={handleClick}>{years.year}</YearText>
-                </div>
-              ))}
+            {artists.map((years) => (
+              <div key={years._id}>
+                <YearText onClick={handleClick}>{years.year}</YearText>
+              </div>
+            ))}
           </Wrapper>
         </>
       )}
