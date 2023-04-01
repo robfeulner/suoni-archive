@@ -22,6 +22,7 @@ const Event = () => {
         if (data.status === 400 || data.status === 500) {
           throw new Error("Not good. Error.");
         }
+
         setArtists(data.data);
       })
       .catch((error) => {
@@ -32,16 +33,18 @@ const Event = () => {
   return (
     <>
       {!artists ? (
-        <></>
+        <>Loading...</>
       ) : (
         <>
-          <div key={findEvent._id}>
-            <h3>{findEvent.artist.join(" + ")}</h3>
+          <EventWrapper>
+            <EventDetailsWrapper key={findEvent._id}>
+              <EventH2>{findEvent.artist.join(" + ")}</EventH2>
 
-            <p>{findEvent.date}</p>
-            <p>{findEvent.venue}</p>
-            <p>{findEvent.price}</p>
-          </div>
+              <P>{findEvent.date}</P>
+              <P>{findEvent.venue}</P>
+              <P>{findEvent.price}</P>
+            </EventDetailsWrapper>
+          </EventWrapper>
           <EditorBox page={"events"} urlId={"eventId"} />
           {/* <DisqusEditor eventId={eventId} /> */}
           <Comments page={"events"} urlId={"eventId"} />
@@ -50,5 +53,26 @@ const Event = () => {
     </>
   );
 };
+
+const EventWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const EventDetailsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: fit-content;
+  border: 2px dotted grey;
+  border-radius: 15px;
+`;
+
+const EventH2 = styled.h2``;
+
+const P = styled.p`
+  font-size: 1.5em;
+`;
 
 export default Event;

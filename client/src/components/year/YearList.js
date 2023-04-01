@@ -30,6 +30,13 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const YearText = styled.h3``;
+const YearText = styled.h1`
+  text-shadow: 1px 2px 0px #ea0000;
+
+  &:hover {
+    color: red;
+    text-shadow: 1px 2px 0px blue;
+  }
+`;
 
 export default YearList;

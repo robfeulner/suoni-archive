@@ -60,25 +60,40 @@ const Artists = () => {
   return (
     <>
       {!artists ? (
-        <></>
+        <>Loading...</>
       ) : (
         <>
           <Wrapper>
             <ArtistWrapper>
-              {artists
-                .filter((name) => name.startsWith(letter))
-                .map((name) => (
-                  <div>
-                    <Link to={`/artist/${name}`}>{name}</Link>
-                  </div>
-                ))}
+              {letter ? (
+                <>
+                  <LetterH1>{letter}</LetterH1>
+                  {artists
+                    .filter((name) => name.startsWith(letter))
+                    .map((name) => (
+                      <div>
+                        <StyledLink to={`/artist/${name}`}>
+                          <Name>{name}</Name>
+                        </StyledLink>
+                      </div>
+                    ))}
+                </>
+              ) : (
+                <>
+                  <ChooseWrapper>
+                    <ChooseSpan>Choose a letter</ChooseSpan>
+                  </ChooseWrapper>
+                </>
+              )}
             </ArtistWrapper>
-            <LettersList
-              artists={artists}
-              setArtists={setArtists}
-              letter={setLetter}
-              setLetter={setLetter}
-            />
+            <RightWrapper>
+              <LettersList
+                artists={artists}
+                setArtists={setArtists}
+                letter={setLetter}
+                setLetter={setLetter}
+              />
+            </RightWrapper>
           </Wrapper>
         </>
       )}
@@ -88,11 +103,45 @@ const Artists = () => {
 
 const Wrapper = styled.div`
   display: flex;
+  justify-content: space-between;
 `;
 
 const ArtistWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const RightWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 30%;
+`;
+
+const LetterH1 = styled.h1`
+  font-size: 3em;
+  margin-left: 40px;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+
+  &:visited {
+    color: blue;
+  }
+`;
+
+const Name = styled.span`
+  font-size: 1.5em;
+`;
+
+const ChooseWrapper = styled.div`
+  margin-left: 30px;
+`;
+const ChooseSpan = styled.span`
+  font-size: 2em;
+  color: black;
+  font-weight: bold;
 `;
 
 export default Artists;

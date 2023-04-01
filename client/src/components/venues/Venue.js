@@ -30,35 +30,45 @@ const Venue = () => {
         <></>
       ) : (
         <Wrapper>
-          <EventWrapper>
-            <h1>{venueId}</h1>
-            {artists
-              .filter((event) => event.year === year)
-              .filter((artist) =>
-                artist.events.some((event) => event.venue === venueId)
-              )
-              .map((artist) =>
-                artist.events
-                  .filter((event) => event.venue === venueId)
+          {year ? (
+            <EventWrapper>
+              <VenueH1>{venueId}</VenueH1>
+              {artists
+                .filter((event) => event.year === year)
+                .filter((artist) =>
+                  artist.events.some((event) => event.venue === venueId)
+                )
+                .map((artist) =>
+                  artist.events
+                    .filter((event) => event.venue === venueId)
 
-                  .map((event) => (
-                    <div key={event._id}>
-                      <Link to={`/events/${event._id}`}>
-                        <h3>{event.artist.join(" + ")}</h3>
-                      </Link>
-                      <p>{event.date}</p>
-                      <p>{event.venue}</p>
-                      <p>{event.price}</p>
-                    </div>
-                  ))
-              )}
-          </EventWrapper>
-          <YearList
-            artists={artists}
-            year={year}
-            setYear={setYear}
-            setPage={setPage}
-          />
+                    .map((event) => (
+                      <div key={event._id}>
+                        <EventLink to={`/events/${event._id}`}>
+                          <EventH2>{event.artist.join(" + ")}</EventH2>
+                        </EventLink>
+                        <P>{event.date}</P>
+                        <P>{event.venue}</P>
+                        <P>{event.price}</P>
+                      </div>
+                    ))
+                )}
+            </EventWrapper>
+          ) : (
+            <>
+              <ChooseWrapper>
+                <ChooseSpan>Choose a year</ChooseSpan>
+              </ChooseWrapper>
+            </>
+          )}
+          <RightWrapper>
+            <YearList
+              artists={artists}
+              year={year}
+              setYear={setYear}
+              setPage={setPage}
+            />
+          </RightWrapper>
         </Wrapper>
       )}
     </>
@@ -67,11 +77,48 @@ const Venue = () => {
 
 const Wrapper = styled.div`
   display: flex;
+  justify-content: space-between;
 `;
 
 const EventWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const VenueH1 = styled.h1`
+  font-size: 3em;
+  margin-left: 30px;
+`;
+
+const RightWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 30%;
+`;
+
+const ChooseWrapper = styled.div`
+  margin-left: 30px;
+`;
+const ChooseSpan = styled.span`
+  font-size: 2em;
+  color: black;
+  font-weight: bold;
+`;
+
+const EventLink = styled(Link)`
+  text-decoration: none;
+  &:visited {
+    color: blue;
+  }
+`;
+
+const EventH2 = styled.h2`
+  margin-bottom: -20px;
+`;
+
+const P = styled.p`
+  font-size: 1.5em;
 `;
 
 export default Venue;

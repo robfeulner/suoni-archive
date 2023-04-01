@@ -10,15 +10,15 @@ const Header = () => {
   const { isLoading, error } = useAuth0;
   return (
     <Wrapper>
-      <LoginButton />
-      <LogoutButton />
+      {/* <LoginButton />
+      <LogoutButton /> */}
       {error && <span>Authentication Error</span>}
       {!error && isLoading && <span>Loading....</span>}
       {!error && !isLoading && (
         <>
           <Profile />
 
-          <StyledLink to="/">
+          <SuoniLink to="/">
             <SuoniWrapper>
               <SuoniWrapper2>
                 <Suoni>SUONI</Suoni>
@@ -30,8 +30,9 @@ const Header = () => {
               <SuoniWrapper3>
                 <Popolo>POPOLO</Popolo>
               </SuoniWrapper3>
+              <P>ARCHIVE</P>
             </SuoniWrapper>
-          </StyledLink>
+          </SuoniLink>
 
           <Links>
             <StyledLink to="/years">
@@ -97,6 +98,15 @@ const Popolo = styled.h1`
   text-shadow: 2px 4px 0px #ea0000;
 `;
 
+const P = styled.p`
+  color: black;
+  font-size: 3em;
+  font-weight: bold;
+  margin-left: 30px;
+  letter-spacing: 15px;
+  margin-top: 15px;
+`;
+
 const Links = styled.div`
   display: flex;
   margin-left: 35px;
@@ -109,6 +119,10 @@ const H2 = styled.h2`
     color: red;
     text-shadow: 1px 2px 0px blue;
   }
+`;
+
+const SuoniLink = styled(NavLink)`
+  text-decoration: none;
 `;
 
 const StyledLink = styled(NavLink)`

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import YearList from "../year/YearList";
+import moment from "moment";
 
 const Workshops = () => {
   const [artists, setArtists] = useState(null);
@@ -27,28 +28,38 @@ const Workshops = () => {
   return (
     <>
       {!artists ? (
-        <></>
+        <>Loading...</>
       ) : (
         <>
           <Wrapper>
-            <ArtistWrapper>
-              {console.log(artists)}
-              {artists
-                .filter((event) => event.year === year)
-                .map((event) =>
-                  event.events.map((event) => (
-                    <div key={event._id}>
-                      <Link to={`/workshops/${event._id}`}>
-                        <h3>{event.name}</h3>
-                      </Link>
-                      <p>{event.date}</p>
-                      <p>{event.venue}</p>
-                      <p>{event.description}</p>
-                    </div>
-                  ))
-                )}
-            </ArtistWrapper>
-            <YearList artists={artists} setYear={setYear} setPage={setPage} />
+            {year ? (
+              <ArtistWrapper>
+                {console.log(artists)}
+                {artists
+                  .filter((event) => event.year === year)
+                  .map((event) =>
+                    event.events.map((event) => (
+                      <div key={event._id}>
+                        <EventLink to={`/workshops/${event._id}`}>
+                          <EventH2>{event.name}</EventH2>
+                        </EventLink>
+                        <P>{moment(event.date).format("MMMM Do YYYY")}</P>
+                        <P>{event.venue}</P>
+                        <P>{event.description}</P>
+                      </div>
+                    ))
+                  )}
+              </ArtistWrapper>
+            ) : (
+              <>
+                <ChooseWrapper>
+                  <ChooseSpan>Choose a year</ChooseSpan>
+                </ChooseWrapper>
+              </>
+            )}
+            <RightWrapper>
+              <YearList artists={artists} setYear={setYear} setPage={setPage} />
+            </RightWrapper>
           </Wrapper>
         </>
       )}
@@ -58,11 +69,43 @@ const Workshops = () => {
 
 const Wrapper = styled.div`
   display: flex;
+  justify-content: space-between;
 `;
 
 const ArtistWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const RightWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 30%;
+`;
+
+const ChooseWrapper = styled.div`
+  margin-left: 30px;
+`;
+const ChooseSpan = styled.span`
+  font-size: 2em;
+  color: black;
+  font-weight: bold;
+`;
+
+const EventLink = styled(Link)`
+  text-decoration: none;
+  &:visited {
+    color: blue;
+  }
+`;
+
+const EventH2 = styled.h2`
+  margin-bottom: -20px;
+`;
+
+const P = styled.p`
+  font-size: 1.5em;
 `;
 
 export default Workshops;
