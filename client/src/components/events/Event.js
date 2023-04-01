@@ -1,11 +1,13 @@
 import styled from "styled-components";
+import EditorBox from "../tinyMCE/Editor";
+import Comments from "../tinyMCE/Comments";
+import DisqusEditor from "../tinyMCE/DisqusEditor";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
 const Event = () => {
   const [artists, setArtists] = useState(null);
   const { eventId } = useParams();
-  
 
   //Allows me to look through out all the years in my data
 
@@ -40,6 +42,9 @@ const Event = () => {
             <p>{findEvent.venue}</p>
             <p>{findEvent.price}</p>
           </div>
+          <EditorBox page={"events"} urlId={"eventId"} />
+          {/* <DisqusEditor eventId={eventId} /> */}
+          <Comments page={"events"} urlId={"eventId"} />
         </>
       )}
     </>

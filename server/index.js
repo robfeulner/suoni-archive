@@ -7,7 +7,14 @@ const port = 8888;
 
 const app = express();
 
-const { getEvents, getWorkshops } = require("./handlers");
+const {
+  getEvents,
+  getWorkshops,
+  addUser,
+  getUsers,
+  addComment,
+  getComments,
+} = require("./handlers");
 
 // Below are methods that are included in express(). We chain them for convenience.
 // --------------------------------------------------------------------------------
@@ -21,6 +28,10 @@ app.get("/test", (req, res) => {
 });
 app.get("/get-events", getEvents);
 app.get("/get-workshops", getWorkshops);
+app.get("/get-users", getUsers);
+app.post("/add-users", addUser);
+app.get("/get-comments", getComments);
+app.post("/add-comment", addComment);
 
 // this is our catch all endpoint.
 app.get("*", (req, res) => {

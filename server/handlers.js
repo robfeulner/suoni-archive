@@ -20,7 +20,7 @@ const getEvents = async (req, res) => {
     await client.connect();
     const db = client.db("suoni");
     const result = await db.collection("events").find().toArray();
-    console.log(result);
+    // console.log(result);
     res.status(200).json({ status: 200, _id, data: result });
     client.close();
   } catch (err) {
@@ -45,16 +45,118 @@ const getWorkshops = async (req, res) => {
   }
 };
 
-// Get all the collections of this MongoDB project
-const getCollections = () => {
-  const events = db.collection("events"); // Items collection
-  const workshops = db.collection("workshops"); // Companies collection
+// get comments
 
-  return { events, workshops };
+const getUsers = async (req, res) => {
+  try {
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("suoni");
+    const result = await db.collection("users").find().toArray();
+    // console.log(result);
+    res.status(200).json({ status: 200, data: result });
+    client.close();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: 500, data: req.body, message: err.message });
+  }
+};
+
+// create a user
+
+const addUser = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+    const db = client.db("suoni");
+    console.log("connected!");
+    console.log(req.body);
+    const { email, name } = req.body;
+    const preExistingUser = await db
+      .collection("users")
+      .findOne({ email: email });
+
+    if (!preExistingUser) {
+      await db.collection("users").insertOne(req.body);
+      return res.status(201).json({
+        status: 201,
+        message: "User added to database",
+        account: req.body,
+      });
+    } else {
+      return res.status(201).json({
+        status: 201,
+        message: "This user already exists",
+        account: preExistingUser,
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    return res
+      .status(500)
+      .json({ status: 500, data: req.body, message: err.message });
+  }
+};
+
+// get comments
+
+const getComments = async (req, res) => {
+  try {
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("suoni");
+    const result = await db.collection("comments").find().toArray();
+    // console.log(result);
+    res.status(200).json({ status: 200, data: result });
+    client.close();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: 500, data: req.body, message: err.message });
+  }
+};
+
+// create a comment
+
+const addComment = async (req, res) => {
+  try {
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("suoni");
+    const { formData, user, date } = req.body;
+    const newId = uuidv4();
+
+    //Add reservation
+
+    const result = await db
+      .collection("comments")
+      .insertOne({ ...req.body, _id: newId });
+
+    console.log(result);
+
+    if (!result) {
+      res.status(404).json({
+        status: 404,
+        data: "An error has occured",
+      });
+    } else {
+      res.status(201).json({
+        status: 201,
+        message: "Comment added!",
+      });
+    }
+    client.close();
+    console.log("disconnected!");
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: 500, data: req.body, message: err.message });
+  }
 };
 
 module.exports = {
   getEvents,
   getWorkshops,
-  getCollections,
+  getComments,
+  addComment,
+  getUsers,
+  addUser,
 };

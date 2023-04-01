@@ -4,19 +4,11 @@ import { FiSearch } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 
 // SEARCH BAR FUNCTIONALITY
-const SearchBar = ({ isExpanded, setIsExpanded }) => {
-  const navigate = useNavigate();
+const SearchBar = () => {
   const [artists, setArtists] = useState(null);
   const [value, setValue] = useState(""); //Input text on search bar
-  // Retrieving items data from hook
-  //   const { items } = useItems({
-  //     searchParamsString: value && "limit=5&search=" + value,
-  //   });
-
-  //Navigation when pressing Enter on search bar
-  //   const handleSelect = () => {
-  //     navigate(`/search?search=${value}`);
-  //   };
+  //Focus for Input
+  const inputRef = useRef(null);
 
   useEffect(() => {
     fetch(`/get-events`)
@@ -47,21 +39,25 @@ const SearchBar = ({ isExpanded, setIsExpanded }) => {
       })
     : [];
 
-  console.log(matchedSearch);
+//   console.log(matchedSearch);
 
   return (
     <Wrapper>
       {/* Expansion of search bar */}
-      <InputWrapper isExpanded={isExpanded}>
+      <InputWrapper>
         <Input
           placeholder="Search Artist"
           value={value}
           onChange={(ev) => setValue(ev.target.value)}
-          onKeyDown={(ev) => {
-            // if (ev.key === "Enter") {
-            //     handleSelect(ev.target.value);
-            //   setValue("");
-            // }
+          //   onKeyDown={(ev) => {
+          // if (ev.key === "Enter") {
+          //     handleSelect(ev.target.value);
+          //   setValue("");
+          // }
+          onBlur={() => {
+            setTimeout(() => {
+              setValue("");
+            }, 400);
           }}
         />
         {/* Conditions for search query autocomplete */}
@@ -91,11 +87,9 @@ const SearchBar = ({ isExpanded, setIsExpanded }) => {
 
 const Div = styled.div`
   border-radius: 15px;
-
   position: absolute;
-  top: 62px;
-  z-index: 4;
-
+  background-color: yellow;
+    z-index: 2;
   ul {
     list-style-type: none;
     padding: 0;
@@ -115,7 +109,7 @@ const ListLink = styled(Link)`
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+
   align-items: center;
   align-content: center;
 `;
@@ -123,15 +117,11 @@ const Wrapper = styled.div`
 const InputWrapper = styled.div``;
 
 const Input = styled.input`
-  width: 80%;
   height: 40px;
   border: none;
   border-radius: 20px;
   padding: 0 16px;
   font-size: 1rem;
-
-  transform: translateY(-40%);
-  margin-top: 30px;
 `;
 
 const FiSearchStyled = styled(FiSearch)`

@@ -13,6 +13,7 @@ import Workshops from "./workshops/Workshops";
 import Workshop from "./workshops/Workshop";
 import GlobalStyles from "./global/GlobalStyles";
 
+
 const App = () => {
   return (
     <>

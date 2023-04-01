@@ -1,6 +1,10 @@
 import styled from "styled-components";
+import { useEffect } from "react";
 
 const Home = () => {
+
+
+
     return(
         <h1>Home</h1>
     )
