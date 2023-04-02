@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import EditorBox from "../tinyMCE/Editor";
+import Comments from "../tinyMCE/Comments";
 
 const Workshop = () => {
   const [artists, setArtists] = useState(null);
@@ -29,20 +31,57 @@ const Workshop = () => {
   return (
     <>
       {!artists ? (
-        <></>
+        <>Loading...</>
       ) : (
         <>
-          <div key={findEvent._id}>
-            <h3>{findEvent.name}</h3>
+        <Wrapper>
+            <EventWrapper>
+          <EventDetailsWrapper key={findEvent._id}>
+            <EventH2>{findEvent.name}</EventH2>
 
-            <p>{findEvent.date}</p>
-            <p>{findEvent.venue}</p>
-            <p>{findEvent.description}</p>
-          </div>
+            <P>{findEvent.date}</P>
+            <P>{findEvent.venue}</P>
+            <P>{findEvent.description}</P>
+          </EventDetailsWrapper>
+          </EventWrapper>
+            <EditorBox page={"workshops"} urlId={"workshopId"} findEvent={findEvent} artists={artists}/>
+            {/* <DisqusEditor eventId={eventId} /> */}
+            <Comments page={"workshops"} urlId={"workshopId"} />
+          </Wrapper>
         </>
       )}
     </>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 1200px;
+  /* align-items: center; */
+`;
+
+const EventWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const EventDetailsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: fit-content;
+  border: 2px dotted grey;
+  border-radius: 15px;
+  min-width: 1200px;
+  margin: 30px 0;
+`;
+
+const EventH2 = styled.h2``;
+
+const P = styled.p`
+  font-size: 1.5em;
+`;
 
 export default Workshop;

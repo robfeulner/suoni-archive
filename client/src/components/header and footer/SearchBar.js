@@ -1,3 +1,4 @@
+import { COLORS } from "../global/constants";
 import styled from "styled-components";
 import { useState, useRef, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
@@ -7,6 +8,8 @@ import { Link, useNavigate } from "react-router-dom";
 const SearchBar = () => {
   const [artists, setArtists] = useState(null);
   const [value, setValue] = useState(""); //Input text on search bar
+  const [isTransition, setIsTransition] = useState(false);
+
   //Focus for Input
   const inputRef = useRef(null);
 
@@ -39,7 +42,18 @@ const SearchBar = () => {
       })
     : [];
 
-//   console.log(matchedSearch);
+  //Transition for SearchDiv
+
+  const handleEvent = () => {
+    setIsTransition(true);
+  };
+
+  const handleBlur = () => {
+    setTimeout(() => {
+      setValue("");
+      setIsTransition(false);
+    }, 200);
+  };
 
   return (
     <Wrapper>
@@ -54,15 +68,19 @@ const SearchBar = () => {
           //     handleSelect(ev.target.value);
           //   setValue("");
           // }
-          onBlur={() => {
-            setTimeout(() => {
-              setValue("");
-            }, 400);
-          }}
+          // onBlur={() => {
+          //   setTimeout(() => {
+          //     setValue("");
+          //   }, 400);
+          // }}
+          // onFocus={handleEvent}
+          onFocus={handleEvent}
+          onBlur={handleBlur}
+          ref={inputRef}
         />
         {/* Conditions for search query autocomplete */}
         {value.length >= 3 && matchedSearch.length > 0 && (
-          <Div>
+          <SearchDiv isTransition={isTransition}>
             <ul>
               {matchedSearch.map((matchSuggestion) => (
                 <ListLink
@@ -74,7 +92,7 @@ const SearchBar = () => {
               ))}
               {console.log(matchedSearch)}
             </ul>
-          </Div>
+          </SearchDiv>
         )}
       </InputWrapper>
       {/* Styling for search results */}
@@ -85,11 +103,17 @@ const SearchBar = () => {
   );
 };
 
-const Div = styled.div`
-  border-radius: 15px;
+const SearchDiv = styled.div`
+  background-color: ${COLORS.blue};
+  border-radius: 25px;
+  color: ${COLORS.cream};
   position: absolute;
-  background-color: yellow;
-    z-index: 2;
+  min-width: 325px;
+  margin-top: -5px;
+  z-index: 4;
+
+  transition: opacity 2s ease-in-out, width 2s ease-in-out;
+  opacity: ${({ isTransition }) => (isTransition ? "1" : "0")};
   ul {
     list-style-type: none;
     padding: 0;
@@ -97,14 +121,22 @@ const Div = styled.div`
 `;
 
 const Li = styled.li`
-  padding: 10px;
+  padding: 0 10px;
+  font-size: 1.2em;
   &:hover {
-    color: green;
+    /* background-color: ${COLORS.red};
+    border-radius: 25px; */
+    font-style: italic;
+    text-shadow: 2px 4px 0px #ea0000;
   }
 `;
 
 const ListLink = styled(Link)`
   text-decoration: none;
+  color: ${COLORS.cream};
+  &:visited {
+    color: ${COLORS.cream};
+  }
 `;
 
 const Wrapper = styled.div`

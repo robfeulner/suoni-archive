@@ -1,22 +1,35 @@
+import { COLORS } from "../global/constants";
 import styled from "styled-components";
 import { Link, NavLink } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import LoginButton from "../auth0/LoginButton";
 import LogoutButton from "../auth0/LogoutButton";
 import Profile from "../auth0/Profile";
+import { useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { UserContext } from "../auth0/CurrentUserContext";
 
 const Header = () => {
   const { isLoading, error } = useAuth0;
+  const { account } = useContext(UserContext);
   return (
     <Wrapper>
-      {/* <LoginButton />
-      <LogoutButton /> */}
       {error && <span>Authentication Error</span>}
       {!error && isLoading && <span>Loading....</span>}
       {!error && !isLoading && (
         <>
-          <Profile />
+          {!account ? (
+            <>
+              <SignInDiv>
+                <SignInSpan>Click here to sign in →</SignInSpan>
+                <LoginButton />
+              </SignInDiv>
+            </>
+          ) : (
+            <>
+              <Profile />
+            </>
+          )}
 
           <SuoniLink to="/">
             <SuoniWrapper>
@@ -34,22 +47,23 @@ const Header = () => {
             </SuoniWrapper>
           </SuoniLink>
 
-          <Links>
-            <StyledLink to="/years">
-              <H2>Year</H2>
-            </StyledLink>
-            <StyledLink to="/artists">
-              <H2>Artists</H2>
-            </StyledLink>
-            <StyledLink to="/venues">
-              <H2>Venues</H2>
-            </StyledLink>
-            <StyledLink to="/workshops">
-              <H2>Workshops</H2>
-            </StyledLink>
-          </Links>
-
-          <SearchBar />
+          <BottomRow>
+            <Links>
+              <StyledLink to="/years">
+                <H2>Year</H2>
+              </StyledLink>
+              <StyledLink to="/artists">
+                <H2>Artists</H2>
+              </StyledLink>
+              <StyledLink to="/venues">
+                <H2>Venues</H2>
+              </StyledLink>
+              <StyledLink to="/workshops">
+                <H2>Workshops</H2>
+              </StyledLink>
+            </Links>
+            <SearchBar />
+          </BottomRow>
         </>
       )}
     </Wrapper>
@@ -59,6 +73,14 @@ const Header = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const SignInDiv = styled.div`
+  align-self: flex-end;
+`;
+
+const SignInSpan = styled.span`
+  font-size: 1.25em;
 `;
 
 const SuoniWrapper = styled.div`
@@ -116,8 +138,8 @@ const H2 = styled.h2`
   text-shadow: 1px 2px 0px #ea0000;
 
   &:hover {
-    color: red;
-    text-shadow: 1px 2px 0px blue;
+    color: ${COLORS.red};
+    text-shadow: 1px 2px 0px ${COLORS.blue};
   }
 `;
 
@@ -130,6 +152,11 @@ const StyledLink = styled(NavLink)`
   &.active {
     text-decoration: underline;
   }
+`;
+
+const BottomRow = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export default Header;

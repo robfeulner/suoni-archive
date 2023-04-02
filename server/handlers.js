@@ -125,8 +125,6 @@ const addComment = async (req, res) => {
     const { formData, user, date } = req.body;
     const newId = uuidv4();
 
-    //Add reservation
-
     const result = await db
       .collection("comments")
       .insertOne({ ...req.body, _id: newId });

@@ -5,5 +5,5 @@ export const COLORS = {
   // Red
   red: "#EA0000",
   //Cream (background)
-  cream: "#FFF6E9",
+  cream: "#ffe4bc",
 };

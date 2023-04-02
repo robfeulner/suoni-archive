@@ -63,6 +63,7 @@ const Year = () => {
               </>
             )}
             <RightWrapper>
+              {!year ? (<></>) : (
               <PageDiv>
                 {/* <button onClick={() => setPage(1)}>Page 1</button> */}
                 <Button disabled={page === 1} onClick={() => setPage(page - 1)}>
@@ -76,6 +77,7 @@ const Year = () => {
                   Next Page
                 </Button>
               </PageDiv>
+              )}
               <YearList
                 year={year}
                 setYear={setYear}
@@ -115,7 +117,7 @@ const RightWrapper = styled.div`
 const PageDiv = styled.div``;
 
 const Button = styled.button`
-  background-color: none;
+  background-color: transparent;
   border: none;
   color: blue;
   font-size: 1em;
@@ -144,18 +146,18 @@ const ChooseSpan = styled.span`
 `;
 
 const EventLink = styled(Link)`
-text-decoration: none;
-&:visited{
-  color: blue;
-}
-`
+  text-decoration: none;
+  &:visited {
+    color: blue;
+  }
+`;
 
 const EventH2 = styled.h2`
-margin-bottom: -20px;
-`
+  margin-bottom: -20px;
+`;
 
 const P = styled.p`
-font-size: 1.5em;
-`
+  font-size: 1.5em;
+`;
 
 export default Year;

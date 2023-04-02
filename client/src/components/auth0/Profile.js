@@ -9,7 +9,12 @@ const Profile = () => {
 
   return isAuthenticated ? (
     <Wrapper>
-      {user?.name && <Span>Hello, {user?.nickname}!</Span>}
+      {user?.name && (
+        <Span>
+          Hello, {user?.nickname}!
+          {user.email === "kennedycurse@gmail.com" ? <>✨</> : <></>}
+        </Span>
+      )}
       {user?.picture && <Img src={user.picture} alt={user?.name} />}
       <CustomLogoutButton />
     </Wrapper>
@@ -31,6 +36,7 @@ const Span = styled.span`
 const Img = styled.img`
   height: 40px;
   border-radius: 50%;
+  margin-left: -5px;
 `;
 
 const CustomLogoutButton = styled(LogoutButton)`

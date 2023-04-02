@@ -36,23 +36,32 @@ const Event = () => {
         <>Loading...</>
       ) : (
         <>
-          <EventWrapper>
-            <EventDetailsWrapper key={findEvent._id}>
-              <EventH2>{findEvent.artist.join(" + ")}</EventH2>
+          <Wrapper>
+            <EventWrapper>
+              <EventDetailsWrapper key={findEvent._id}>
+                <EventH2>{findEvent.artist.join(" + ")}</EventH2>
 
-              <P>{findEvent.date}</P>
-              <P>{findEvent.venue}</P>
-              <P>{findEvent.price}</P>
-            </EventDetailsWrapper>
-          </EventWrapper>
-          <EditorBox page={"events"} urlId={"eventId"} />
-          {/* <DisqusEditor eventId={eventId} /> */}
-          <Comments page={"events"} urlId={"eventId"} />
+                <P>{findEvent.date}</P>
+                <P>{findEvent.venue}</P>
+                <P>{findEvent.price}</P>
+              </EventDetailsWrapper>
+            </EventWrapper>
+            <EditorBox page={"events"} urlId={"eventId"} findEvent={findEvent} artists={artists}/>
+            {/* <DisqusEditor eventId={eventId} /> */}
+            <Comments page={"events"} urlId={"eventId"} />
+          </Wrapper>
         </>
       )}
     </>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 1200px;
+  /* align-items: center; */
+`;
 
 const EventWrapper = styled.div`
   display: flex;
@@ -67,6 +76,8 @@ const EventDetailsWrapper = styled.div`
   width: fit-content;
   border: 2px dotted grey;
   border-radius: 15px;
+  min-width: 1200px;
+  margin: 30px 0;
 `;
 
 const EventH2 = styled.h2``;
