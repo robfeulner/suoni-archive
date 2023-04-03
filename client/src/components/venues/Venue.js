@@ -43,6 +43,7 @@ const Venue = () => {
                     .filter((event) => event.venue === venueId)
 
                     .map((event) => (
+                      // {venue.length < 1 ? (<>No events</>) : (<>
                       <div key={event._id}>
                         <EventLink to={`/events/${event._id}`}>
                           <EventH2>{event.artist.join(" + ")}</EventH2>
@@ -51,6 +52,7 @@ const Venue = () => {
                         <P>{event.venue}</P>
                         <P>{event.price}</P>
                       </div>
+                      // </>)}
                     ))
                 )}
             </EventWrapper>

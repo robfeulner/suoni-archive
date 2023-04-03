@@ -14,6 +14,7 @@ const {
   getUsers,
   addComment,
   getComments,
+  deleteComment,
 } = require("./handlers");
 
 // Below are methods that are included in express(). We chain them for convenience.
@@ -32,6 +33,7 @@ app.get("/get-users", getUsers);
 app.post("/add-users", addUser);
 app.get("/get-comments", getComments);
 app.post("/add-comment", addComment);
+app.delete(`/delete-comment/:_id`, deleteComment);
 
 // this is our catch all endpoint.
 app.get("*", (req, res) => {

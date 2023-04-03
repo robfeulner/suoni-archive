@@ -140,6 +140,7 @@ const addComment = async (req, res) => {
       res.status(201).json({
         status: 201,
         message: "Comment added!",
+        _id: newId,
       });
     }
     client.close();
@@ -150,11 +151,49 @@ const addComment = async (req, res) => {
   }
 };
 
+// Delete a comment
+
+const deleteComment = async (req, res) => {
+  const { _id } = req.params;
+
+  const client = new MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+
+    const db = client.db("suoni");
+
+    const deleteResponse = await db
+      .collection("comments")
+      .findOneAndDelete({ _id: _id });
+
+    console.log(deleteResponse);
+
+    if (!deleteResponse.value) {
+      res.status(404).json({
+        status: 404,
+        message: `Comment #${_id} not found.`,
+      });
+    } else {
+      res.status(204).json({
+        status: 204,
+        message: `You deleted comment #${_id}`,
+      });
+    }
+
+    console.log("disconnected!");
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: 500, message: err.message });
+  }
+  client.close();
+};
+
 module.exports = {
   getEvents,
   getWorkshops,
   getComments,
   addComment,
+  deleteComment,
   getUsers,
   addUser,
 };

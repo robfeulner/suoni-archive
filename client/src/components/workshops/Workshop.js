@@ -7,6 +7,7 @@ import Comments from "../tinyMCE/Comments";
 const Workshop = () => {
   const [artists, setArtists] = useState(null);
   const { workshopId } = useParams();
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     fetch(`/get-workshops`)
@@ -34,19 +35,31 @@ const Workshop = () => {
         <>Loading...</>
       ) : (
         <>
-        <Wrapper>
+          <Wrapper>
             <EventWrapper>
-          <EventDetailsWrapper key={findEvent._id}>
-            <EventH2>{findEvent.name}</EventH2>
+              <EventDetailsWrapper key={findEvent._id}>
+                <EventH2>{findEvent.name}</EventH2>
 
-            <P>{findEvent.date}</P>
-            <P>{findEvent.venue}</P>
-            <P>{findEvent.description}</P>
-          </EventDetailsWrapper>
-          </EventWrapper>
-            <EditorBox page={"workshops"} urlId={"workshopId"} findEvent={findEvent} artists={artists}/>
+                <P>{findEvent.date}</P>
+                <P>{findEvent.venue}</P>
+                <P>{findEvent.description}</P>
+              </EventDetailsWrapper>
+            </EventWrapper>
+            <EditorBox
+              page={"workshops"}
+              urlId={"workshopId"}
+              findEvent={findEvent}
+              artists={artists}
+              comments={comments}
+              setComments={setComments}
+            />
             {/* <DisqusEditor eventId={eventId} /> */}
-            <Comments page={"workshops"} urlId={"workshopId"} />
+            <Comments
+              page={"workshops"}
+              urlId={"workshopId"}
+              comments={comments}
+              setComments={setComments}
+            />
           </Wrapper>
         </>
       )}
@@ -57,7 +70,8 @@ const Workshop = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 1200px;
+  max-width: 1200px;
+  margin: auto;
   /* align-items: center; */
 `;
 

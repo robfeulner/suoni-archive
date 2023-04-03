@@ -3,26 +3,34 @@ import { COLORS } from "../global/constants";
 import { Editor } from "@tinymce/tinymce-react";
 import { useState, useContext, useEffect } from "react";
 import { useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../auth0/CurrentUserContext";
 
-const EditorBox = ({ page, urlId, findEvent, artists }) => {
-  const [comment, setComment] = useState();
+const EditorBox = ({
+  page,
+  urlId,
+  findEvent,
+  artists,
+  comments,
+  setComments,
+}) => {
   const [error, setError] = useState();
-  const [editorValue, setEditorValue] = useState();
+  const [editorValue, setEditorValue] = useState(null);
   const { account } = useContext(UserContext);
 
   const params = useParams();
+  const navigate = useNavigate();
 
   const editorRef = useRef();
   const currentdate = new Date();
   console.log(account);
+
   const handleSubmit = (e) => {
     //     // TODO: POST info to server
     e.preventDefault();
     console.log(account);
     if (account) {
-      const metdaData = {
+      const metaData = {
         formData: editorValue,
         email: account.email,
         nickname: account.nickname,
@@ -37,22 +45,26 @@ const EditorBox = ({ page, urlId, findEvent, artists }) => {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(metdaData),
+        body: JSON.stringify(metaData),
       })
         .then((res) => res.json())
         .then((data) => {
           if (data.status === 400 || data.status === 500) {
             throw new Error("Not good. Error.");
           }
-          setComment(data);
-          console.log(comment);
+          metaData._id = data._id;
+          setComments([...comments, metaData]);
+          setEditorValue("");
+          console.log(comments);
         })
         .catch((error) => {
           console.log(error);
         });
-    } else {
-      setComment(null);
     }
+  };
+
+  const handleClick = () => {
+    setEditorValue("");
   };
 
   return (
@@ -63,10 +75,12 @@ const EditorBox = ({ page, urlId, findEvent, artists }) => {
         </>
       ) : (
         <Wrapper>
+          <H2Wrapper>
           <h2>
             Add your thoughts, memories, images, or video links in the comment
             section!
           </h2>
+          </H2Wrapper>
           <form onSubmit={handleSubmit}>
             <Editor
               onInit={(evt, editor) => (editorRef.current = editor)}
@@ -118,6 +132,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-content: center;
 `;
+
+const H2Wrapper = styled.div`
+margin: auto;
+`
 
 const EventSpan = styled.span`
   color: ${COLORS.red};

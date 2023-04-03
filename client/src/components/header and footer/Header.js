@@ -101,6 +101,7 @@ const Suoni = styled.h1`
   font-size: 6em;
   line-height: 0px;
   text-shadow: 2px 4px 0px #ea0000;
+  
 `;
 const SuoniColumn = styled.div`
   display: flex;

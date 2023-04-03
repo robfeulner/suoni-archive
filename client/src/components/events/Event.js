@@ -8,6 +8,7 @@ import { Link, useParams } from "react-router-dom";
 const Event = () => {
   const [artists, setArtists] = useState(null);
   const { eventId } = useParams();
+  const [comments, setComments] = useState([]);
 
   //Allows me to look through out all the years in my data
 
@@ -46,9 +47,21 @@ const Event = () => {
                 <P>{findEvent.price}</P>
               </EventDetailsWrapper>
             </EventWrapper>
-            <EditorBox page={"events"} urlId={"eventId"} findEvent={findEvent} artists={artists}/>
+            <EditorBox
+              page={"events"}
+              urlId={"eventId"}
+              findEvent={findEvent}
+              artists={artists}
+              comments={comments}
+              setComments={setComments}
+            />
             {/* <DisqusEditor eventId={eventId} /> */}
-            <Comments page={"events"} urlId={"eventId"} />
+            <Comments
+              page={"events"}
+              urlId={"eventId"}
+              comments={comments}
+              setComments={setComments}
+            />
           </Wrapper>
         </>
       )}
@@ -59,7 +72,8 @@ const Event = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 1200px;
+  max-width: 1200px;
+  margin: auto;
   /* align-items: center; */
 `;
 
