@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./header and footer/Header";
 import Footer from "./header and footer/Footer";
-import Home from "../home/Home";
+import Home from "./home/Home";
 import Artists from "./artists/Artists";
 import Artist from "./artists/Artist";
 import Event from "./events/Event";

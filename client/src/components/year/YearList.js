@@ -28,6 +28,11 @@ const YearList = ({ year, setYear, artists, setPage }) => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  background-image: url("/images/yearscribble01.png");
+  min-width: 300px;
+  background-position: center;
+  align-items: center;
+  background-repeat: no-repeat;
 `;
 
 const YearText = styled.h1`

@@ -5,13 +5,28 @@ import SearchBar from "./SearchBar";
 import LoginButton from "../auth0/LoginButton";
 import LogoutButton from "../auth0/LogoutButton";
 import Profile from "../auth0/Profile";
+import Scribble from "./Scribble";
+import HeaderScribble from "../images/HeaderScribble";
+
 import { useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { UserContext } from "../auth0/CurrentUserContext";
+import { useState } from "react";
 
 const Header = () => {
   const { isLoading, error } = useAuth0;
   const { account } = useContext(UserContext);
+  const [image, setImage] = useState();
+  console.log(image);
+
+  const handleClick = (event) => {
+    setImage(event.target.innerText);
+  };
+
+  const handleHome = () => {
+    setImage(null);
+  };
+
   return (
     <Wrapper>
       {error && <span>Authentication Error</span>}
@@ -21,7 +36,7 @@ const Header = () => {
           {!account ? (
             <>
               <SignInDiv>
-                <SignInSpan>Click here to sign in →</SignInSpan>
+                {/* <SignInSpan>Click here to sign in →</SignInSpan> */}
                 <LoginButton />
               </SignInDiv>
             </>
@@ -30,35 +45,36 @@ const Header = () => {
               <Profile />
             </>
           )}
-
-          <SuoniLink to="/">
-            <SuoniWrapper>
-              <SuoniWrapper2>
-                <Suoni>SUONI</Suoni>
-                <SuoniColumn>
-                  <PerIl>PER</PerIl>
-                  <PerIl>I L</PerIl>
-                </SuoniColumn>
-              </SuoniWrapper2>
-              <SuoniWrapper3>
-                <Popolo>POPOLO</Popolo>
-              </SuoniWrapper3>
-              <P>ARCHIVE</P>
-            </SuoniWrapper>
-          </SuoniLink>
-
+          <MainRow>
+            <SuoniLink to="/" onClick={handleHome}>
+              <SuoniWrapper>
+                <SuoniWrapper2>
+                  <Suoni>SUONI</Suoni>
+                  <SuoniColumn>
+                    <PerIl>PER</PerIl>
+                    <PerIl>I L</PerIl>
+                  </SuoniColumn>
+                </SuoniWrapper2>
+                <SuoniWrapper3>
+                  <Popolo>POPOLO</Popolo>
+                </SuoniWrapper3>
+                <P>ARCHIVE</P>
+              </SuoniWrapper>
+            </SuoniLink>
+            <Scribble image={image} setImage={setImage} />
+          </MainRow>
           <BottomRow>
             <Links>
               <StyledLink to="/years">
-                <H2>Year</H2>
+                <H2 onClick={handleClick}>Year</H2>
               </StyledLink>
-              <StyledLink to="/artists">
+              <StyledLink to="/artists" onClick={handleClick}>
                 <H2>Artists</H2>
               </StyledLink>
-              <StyledLink to="/venues">
+              <StyledLink to="/venues" onClick={handleClick}>
                 <H2>Venues</H2>
               </StyledLink>
-              <StyledLink to="/workshops">
+              <StyledLink to="/workshops" onClick={handleClick}>
                 <H2>Workshops</H2>
               </StyledLink>
             </Links>
@@ -83,6 +99,13 @@ const SignInSpan = styled.span`
   font-size: 1.25em;
 `;
 
+const MainRow = styled.div`
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 const SuoniWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -101,7 +124,6 @@ const Suoni = styled.h1`
   font-size: 6em;
   line-height: 0px;
   text-shadow: 2px 4px 0px #ea0000;
-  
 `;
 const SuoniColumn = styled.div`
   display: flex;
@@ -159,5 +181,7 @@ const BottomRow = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+const Img = styled.img``;
 
 export default Header;

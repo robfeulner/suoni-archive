@@ -55,6 +55,15 @@ const Venue = () => {
                       // </>)}
                     ))
                 )}
+              {artists
+                .filter((event) => event.year === year)
+                .filter((artist) =>
+                  artist.events.some((event) => event.venue === venueId)
+                ).length === 0 && (
+                <EventWrapper center>
+                  <H1>No events found in {year}</H1>
+                </EventWrapper>
+              )}
             </EventWrapper>
           ) : (
             <>
@@ -91,6 +100,11 @@ const VenueH1 = styled.h1`
   font-size: 3em;
   margin-left: 30px;
 `;
+
+const H1 = styled.h1`
+color: black;
+font-style: italic;
+`
 
 const RightWrapper = styled.div`
   display: flex;

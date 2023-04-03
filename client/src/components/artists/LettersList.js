@@ -45,6 +45,11 @@ const LettersList = ({ setLetter }) => {
 
 const Wrapper = styled.div`
   display: flex;
+  background-image: url("/images/letterscribble01.png");
+  min-width: 300px;
+  background-position: left;
+  align-items: center;
+  background-repeat: no-repeat;
 `;
 
 const LeftWrapper = styled.div`

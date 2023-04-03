@@ -27,7 +27,7 @@ const EditorBox = ({
 
   const handleSubmit = (e) => {
     //     // TODO: POST info to server
-    e.preventDefault();
+    // e.preventDefault();
     console.log(account);
     if (account) {
       const metaData = {
@@ -54,7 +54,7 @@ const EditorBox = ({
           }
           metaData._id = data._id;
           setComments([...comments, metaData]);
-          setEditorValue("");
+
           console.log(comments);
         })
         .catch((error) => {
@@ -76,13 +76,14 @@ const EditorBox = ({
       ) : (
         <Wrapper>
           <H2Wrapper>
-          <h2>
-            Add your thoughts, memories, images, or video links in the comment
-            section!
-          </h2>
+            <h2>
+              Add your thoughts, memories, images, or video links in the comment
+              section!
+            </h2>
           </H2Wrapper>
           <form onSubmit={handleSubmit}>
             <Editor
+              apiKey="c6x1ctzd41a98qg5899b6fjitt2chdevvp3xm8f2opni0cmx"
               onInit={(evt, editor) => (editorRef.current = editor)}
               onEditorChange={(content) => setEditorValue(content)}
               src="https://cdn.tiny.cloud/1/c6x1ctzd41a98qg5899b6fjitt2chdevvp3xm8f2opni0cmx/tinymce/5/tinymce.min.js"
@@ -115,7 +116,15 @@ const EditorBox = ({
                 },
               ]}
             />
-            <Button type="submit">Submit Post</Button>
+            {!editorValue ? (
+              <>
+                <Button disabled type="submit">
+                  Submit Post
+                </Button>
+              </>
+            ) : (
+              <Button type="submit">Submit Post</Button>
+            )}
             {/* <button onClick={handleClick}>Submit Post</button> */}
             {/* {console.log(editorRef.current)} */}
           </form>
@@ -134,8 +143,8 @@ const Wrapper = styled.div`
 `;
 
 const H2Wrapper = styled.div`
-margin: auto;
-`
+  margin: auto;
+`;
 
 const EventSpan = styled.span`
   color: ${COLORS.red};
@@ -153,5 +162,14 @@ const Button = styled.button`
 
   &:hover {
     text-shadow: 2px 4px 0px #ea0000;
+  }
+
+  &:disabled {
+    border: 2px solid black;
+    color: grey;
+    cursor: not-allowed;
+    &:hover {
+      text-shadow: 2px 4px 0px black;
+    }
   }
 `;

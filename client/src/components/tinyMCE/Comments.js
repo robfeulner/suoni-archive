@@ -25,23 +25,21 @@ const Comments = ({ page, urlId, comments, setComments }) => {
 
   const handleClick = (commentId) => {
     fetch(`/delete-comment/${commentId}`, { method: "DELETE" })
-      .then((res) => res.json())
+      // .then((res) => res.json())
       .then((data) => {
         if (data.status === 400 || data.status === 500) {
           throw new Error("Not good. Error.");
         }
         // setComments(data.data);
-        // const filteredComments = comments.filter(
-        //   (comment) => commentId !== comments._id
-        // );
-        // setComments(filteredComments);
-        setComments([
-          ...comments.filter((comment) => {
-            if (commentId !== comments.id) {
+
+        setComments(
+          comments.filter((comment) => {
+            console.log(comment._id);
+            if (commentId !== comment._id) {
               return comment;
             }
-          }),
-        ]);
+          })
+        );
       })
       .catch((error) => {
         console.log(error);
@@ -59,19 +57,23 @@ const Comments = ({ page, urlId, comments, setComments }) => {
                   dangerouslySetInnerHTML={{ __html: comment.formData }}
                 ></CommentDiv>
                 <InfoDiv>
-                  <span>
-                    Posted by <BoldSpan>{comment.nickname}</BoldSpan> on{" "}
-                    <ItalicsSpan>
-                      {moment(comment.date).format("MMMM Do, YYYY")}
-                    </ItalicsSpan>
+                  <CreditDiv>
+                    <span>
+                      Posted by <BoldSpan>{comment.nickname}</BoldSpan> on{" "}
+                      <ItalicsSpan>
+                        {moment(comment.date).format("MMMM Do, YYYY")}
+                      </ItalicsSpan>
+                    </span>
                     {account ? (
-                      <>
-                        <FiTrash2 onClick={() => handleClick(comment._id)} />
-                      </>
+                      <TrashDiv>
+                        <FiTrash2Styled
+                          onClick={() => handleClick(comment._id)}
+                        />
+                      </TrashDiv>
                     ) : (
                       <></>
                     )}
-                  </span>
+                  </CreditDiv>
                 </InfoDiv>
               </Wrapper>
             );
@@ -83,23 +85,29 @@ const Comments = ({ page, urlId, comments, setComments }) => {
 
 const Wrapper = styled.div`
   border: 2px black dashed;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   border-radius: 20px;
   /* margin: 15px 0; */
   /* max-height: min-content; */
 
   img {
-    max-width: 85%;
-    max-height: 85%;
-    object-fit: contain;
+    max-width: 500px;
+    height: auto;
+    /* object-fit: contain; */
   }
 `;
 
 const CommentDiv = styled.div`
-font-size: 1.25em;
+  font-size: 1.25em;
 `;
 
 const InfoDiv = styled.div``;
+
+const CreditDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
 
 const BoldSpan = styled.span`
   font-weight: bold;
@@ -107,6 +115,17 @@ const BoldSpan = styled.span`
 
 const ItalicsSpan = styled.span`
   font-style: italic;
+`;
+
+const TrashDiv = styled.div`
+  margin-bottom: -5px;
+`;
+
+const FiTrash2Styled = styled(FiTrash2)`
+  font-size: 2em;
+  margin-top: 10px;
+  color: red;
+  cursor: pointer;
 `;
 
 export default Comments;

@@ -29,6 +29,7 @@ const Artist = () => {
         <>Loading...</>
       ) : (
         <Wrapper>
+          <LeftWrapper>
           <ArtistWrapper>
             <ArtistH1>{artistId}</ArtistH1>
 
@@ -55,6 +56,10 @@ const Artist = () => {
                   </div>
                 ))
             )}
+            </LeftWrapper>
+            <RightWrapper>
+            <img src="/images/artistscribble01.png" alt="scribble" />
+            </RightWrapper>
         </Wrapper>
       )}
     </>
@@ -63,7 +68,12 @@ const Artist = () => {
 
 const Wrapper = styled.div`
   margin-left: 35px;
+  display: flex;
+  justify-content: space-between;
 `;
+
+const LeftWrapper = styled.div`
+`
 
 const ArtistH1 = styled.h1`
   font-size: 3em;
@@ -88,7 +98,7 @@ const P = styled.p`
 const ArtistWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  
 `;
 
 const BackLink = styled(Link)`
@@ -103,5 +113,8 @@ const BackP = styled.p`
   font-size: 1.5em;
   color: red;
 `;
+
+const RightWrapper = styled.p`
+`
 
 export default Artist;
