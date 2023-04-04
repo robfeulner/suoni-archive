@@ -24,8 +24,8 @@ const batchImport = async () => {
     // console.log("Testing Events added!");
     await db.collection("events").insertMany(events);
     console.log("Suoni Events added!");
-    // await db.collection("workshops").insertMany(workshops);
-    // console.log("Suoni Workshops added!");
+    await db.collection("workshops").insertMany(workshops);
+    console.log("Suoni Workshops added!");
     console.log("disconnected!");
   } catch (err) {
     console.log(err);

@@ -9,14 +9,18 @@ const Profile = () => {
 
   return isAuthenticated ? (
     <Wrapper>
-      {user?.name && (
-        <Span>
-          Hello, {user?.nickname}!
-          {user.email === "kennedycurse@gmail.com" ? <>✨</> : <></>}
-        </Span>
-      )}
-      {user?.picture && <Img src={user.picture} alt={user?.name} />}
-      <CustomLogoutButton />
+      <DivTop>
+        {user?.name && (
+          <Span>
+            Hello, {user?.nickname}!
+            {user.email === "kennedycurse@gmail.com" ? <>✨</> : <></>}
+          </Span>
+        )}
+        {user?.picture && <Img src={user.picture} alt={user?.name} />}
+      </DivTop>
+      <DivBottom>
+        <LogoutButton />
+      </DivBottom>
     </Wrapper>
   ) : (
     <></>
@@ -25,8 +29,18 @@ const Profile = () => {
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-end;
   justify-content: flex-end;
+`;
+
+const DivTop = styled.div`
+display: flex;
+align-items: center;
+`;
+
+const DivBottom = styled.div`
+margin-top: -15px;
 `;
 
 const Span = styled.span`
@@ -37,12 +51,6 @@ const Img = styled.img`
   height: 40px;
   border-radius: 50%;
   margin-left: -5px;
-`;
-
-const CustomLogoutButton = styled(LogoutButton)`
-  background-color: red;
-  font-weight: bold;
-  border: none;
 `;
 
 export default Profile;

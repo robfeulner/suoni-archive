@@ -1,3 +1,4 @@
+import Loading from "../global/Loading";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import LettersList from "./LettersList";
@@ -60,7 +61,7 @@ const Artists = () => {
   return (
     <>
       {!artists ? (
-        <>Loading...</>
+        <Loading/>
       ) : (
         <>
           <Wrapper>

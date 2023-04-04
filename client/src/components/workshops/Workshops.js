@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import YearList from "../year/YearList";
 import moment from "moment";
+import Loading from "../global/Loading";
 
 const Workshops = () => {
   const [artists, setArtists] = useState(null);
@@ -28,13 +29,14 @@ const Workshops = () => {
   return (
     <>
       {!artists ? (
-        <>Loading...</>
+        <Loading/>
       ) : (
         <>
           <Wrapper>
             {year ? (
               <ArtistWrapper>
-                {console.log(artists)}
+                <YearH1>{year}</YearH1>
+                
                 {artists
                   .filter((event) => event.year === year)
                   .map((event) =>
@@ -76,6 +78,12 @@ const ArtistWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+const YearH1 = styled.h1`
+  font-size: 3em;
+  margin-left: 30px;
+`;
+
 
 const RightWrapper = styled.div`
   display: flex;

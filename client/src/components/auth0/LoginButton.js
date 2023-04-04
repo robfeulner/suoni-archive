@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { COLORS } from "../global/constants";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const LoginButton = () => {
@@ -8,7 +9,7 @@ const LoginButton = () => {
       <>
         <Button onClick={() => loginWithRedirect()}>
           Click here to sign in
-        </Button>
+      </Button>
       </>
     )
   );
@@ -19,8 +20,14 @@ const Button = styled.button`
   font-size: 1.5em;
   border-radius: 20px;
   padding: 3px 10px;
-  border: 2px blue solid;
+  border: 2px ${COLORS.blue} solid;
   cursor: pointer;
+
+  &:hover {
+    color: ${COLORS.red};
+    text-shadow: 2px 4px 0px ${COLORS.blue};
+    border: 2px black solid;
+  }
 `;
 
 export default LoginButton;

@@ -88,7 +88,8 @@ const EditorBox = ({
               onEditorChange={(content) => setEditorValue(content)}
               src="https://cdn.tiny.cloud/1/c6x1ctzd41a98qg5899b6fjitt2chdevvp3xm8f2opni0cmx/tinymce/5/tinymce.min.js"
               referrerpolicy="origin"
-              plugins={["image"]}
+              plugins={["image", "media mediaembed"]}
+              mediaembed_max_width={[450]}
               toolbar={[
                 { name: "history", items: ["undo", "redo"] },
                 { name: "styles", items: ["styleselect"] },
@@ -104,6 +105,7 @@ const EditorBox = ({
                 },
                 { name: "indentation", items: ["outdent", "indent"] },
                 { name: "image", items: ["image"] },
+                { name: "media", items: ["media"] },
               ]}
               image_list={[
                 {

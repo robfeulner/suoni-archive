@@ -89,6 +89,7 @@ const Header = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  /* margin-top: -20px; */
 `;
 
 const SignInDiv = styled.div`
@@ -104,6 +105,7 @@ const MainRow = styled.div`
   gap: 20px;
   align-items: center;
   justify-content: space-between;
+  margin-top: -50px;
 `;
 
 const SuoniWrapper = styled.div`

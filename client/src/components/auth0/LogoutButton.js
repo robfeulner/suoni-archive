@@ -1,3 +1,6 @@
+import styled from "styled-components";
+import { COLORS } from "../global/constants";
+
 import { useAuth0 } from "@auth0/auth0-react";
 
 const LogoutButton = () => {
@@ -5,10 +8,25 @@ const LogoutButton = () => {
   return (
     isAuthenticated && (
       <>
-        <button onClick={() => logout()}>Sign Out</button>
+        <Button onClick={() => logout()}>Sign Out</Button>
       </>
     )
   );
 };
+
+const Button = styled.button`
+  background-color: transparent;
+  font-size: 1.25em;
+  border-radius: 20px;
+  padding: 3px 10px;
+  border: 2px ${COLORS.blue} solid;
+  cursor: pointer;
+
+  &:hover {
+    color: ${COLORS.red};
+    text-shadow: 2px 4px 0px ${COLORS.blue};
+    border: 2px black solid;
+  }
+`;
 
 export default LogoutButton;

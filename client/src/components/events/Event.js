@@ -1,3 +1,4 @@
+import Loading from "../global/Loading";
 import styled from "styled-components";
 import EditorBox from "../tinyMCE/Editor";
 import Comments from "../tinyMCE/Comments";
@@ -34,7 +35,7 @@ const Event = () => {
   return (
     <>
       {!artists ? (
-        <>Loading...</>
+        <Loading/>
       ) : (
         <>
           <Wrapper>

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import YearList from "./YearList";
+import Loading from "../global/Loading";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
@@ -32,7 +33,7 @@ const Year = () => {
   return (
     <>
       {!artists ? (
-        <>Loading...</>
+        <Loading />
       ) : (
         <>
           <Wrapper>
@@ -63,20 +64,25 @@ const Year = () => {
               </>
             )}
             <RightWrapper>
-              {!year ? (<></>) : (
-              <PageDiv>
-                {/* <button onClick={() => setPage(1)}>Page 1</button> */}
-                <Button disabled={page === 1} onClick={() => setPage(page - 1)}>
-                  Previous Page
-                </Button>
-                <Span>{page}</Span>
-                <Button
-                  disabled={endIndex >= artists[0].events.length}
-                  onClick={() => setPage(page + 1)}
-                >
-                  Next Page
-                </Button>
-              </PageDiv>
+              {!year ? (
+                <></>
+              ) : (
+                <PageDiv>
+                  {/* <button onClick={() => setPage(1)}>Page 1</button> */}
+                  <Button
+                    disabled={page === 1}
+                    onClick={() => setPage(page - 1)}
+                  >
+                    Previous Page
+                  </Button>
+                  <Span>{page}</Span>
+                  <Button
+                    disabled={endIndex >= artists[0].events.length}
+                    onClick={() => setPage(page + 1)}
+                  >
+                    Next Page
+                  </Button>
+                </PageDiv>
               )}
               <YearList
                 year={year}
