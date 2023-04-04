@@ -35,7 +35,7 @@ const Event = () => {
   return (
     <>
       {!artists ? (
-        <Loading/>
+        <Loading />
       ) : (
         <>
           <Wrapper>
@@ -46,6 +46,7 @@ const Event = () => {
                 <P>{findEvent.date}</P>
                 <P>{findEvent.venue}</P>
                 <P>{findEvent.price}</P>
+                <P>{findEvent.description}</P>
               </EventDetailsWrapper>
             </EventWrapper>
             <EditorBox

@@ -7,7 +7,7 @@ import moment from "moment";
 const Artist = () => {
   const [artists, setArtists] = useState(null);
   const { artistId } = useParams();
-  console.log(artistId);
+  
 
   useEffect(() => {
     fetch(`/get-events`)
@@ -33,10 +33,6 @@ const Artist = () => {
           <LeftWrapper>
             <ArtistWrapper>
               <ArtistH1>{artistId}</ArtistH1>
-
-              <BackLink to="#" onClick={() => window.history.back()}>
-                <BackP>← Back</BackP>
-              </BackLink>
             </ArtistWrapper>
 
             {artists
@@ -77,7 +73,6 @@ const LeftWrapper = styled.div``;
 
 const ArtistH1 = styled.h1`
   font-size: 3em;
-  margin-left: 30px;
 `;
 
 const EventLink = styled(Link)`

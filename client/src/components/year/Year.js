@@ -22,7 +22,6 @@ const Year = () => {
           throw new Error("Not good. Error.");
         }
         setArtists(data.data);
-        // console.log(artists);
       })
 
       .catch((error) => {
@@ -101,6 +100,7 @@ const Year = () => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-left: 35px;
 `;
 
 const EventWrapper = styled.div`

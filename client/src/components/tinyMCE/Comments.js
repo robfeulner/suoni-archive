@@ -34,7 +34,6 @@ const Comments = ({ page, urlId, comments, setComments }) => {
 
         setComments(
           comments.filter((comment) => {
-            console.log(comment._id);
             if (commentId !== comment._id) {
               return comment;
             }
@@ -64,7 +63,7 @@ const Comments = ({ page, urlId, comments, setComments }) => {
                         {moment(comment.date).format("MMMM Do, YYYY")}
                       </ItalicsSpan>
                     </span>
-                    {account ? (
+                    {account.email === "kennedycurse@gmail.com" ? (
                       <TrashDiv>
                         <FiTrash2Styled
                           onClick={() => handleClick(comment._id)}
@@ -91,7 +90,7 @@ const Wrapper = styled.div`
   /* max-height: min-content; */
 
   img {
-    max-width: 500px;
+    max-width: px;
     height: auto;
     /* object-fit: contain; */
   }

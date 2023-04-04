@@ -20,7 +20,7 @@ const getEvents = async (req, res) => {
     await client.connect();
     const db = client.db("suoni");
     const result = await db.collection("events").find().toArray();
-    // console.log(result);
+
     res.status(200).json({ status: 200, _id, data: result });
     client.close();
   } catch (err) {
@@ -36,7 +36,7 @@ const getWorkshops = async (req, res) => {
     await client.connect();
     const db = client.db("suoni");
     const result = await db.collection("workshops").find({}).toArray();
-    // console.log(result);
+
     res.status(200).json({ status: 200, data: result });
     client.close();
   } catch (err) {
@@ -53,7 +53,7 @@ const getUsers = async (req, res) => {
     await client.connect();
     const db = client.db("suoni");
     const result = await db.collection("users").find().toArray();
-    // console.log(result);
+
     res.status(200).json({ status: 200, data: result });
     client.close();
   } catch (err) {
@@ -69,8 +69,7 @@ const addUser = async (req, res) => {
   try {
     await client.connect();
     const db = client.db("suoni");
-    console.log("connected!");
-    console.log(req.body);
+
     const { email, name } = req.body;
     const preExistingUser = await db
       .collection("users")
@@ -106,7 +105,7 @@ const getComments = async (req, res) => {
     await client.connect();
     const db = client.db("suoni");
     const result = await db.collection("comments").find().toArray();
-    // console.log(result);
+
     res.status(200).json({ status: 200, data: result });
     client.close();
   } catch (err) {
@@ -165,8 +164,6 @@ const deleteComment = async (req, res) => {
     const deleteResponse = await db
       .collection("comments")
       .findOneAndDelete({ _id: _id });
-
-    console.log(deleteResponse);
 
     if (!deleteResponse.value) {
       res.status(404).json({

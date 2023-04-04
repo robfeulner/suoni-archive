@@ -13,7 +13,7 @@ const Footer = () => {
         <Archive>ARCHIVE</Archive>
       </SuoniDiv>
       <div>
-        <img src="/images/footerscribble01.png" alt="footer scribble" />
+        <ScribbleImg src="/images/footerscribble01.png" alt="footer scribble" />
       </div>
       <IconDiv>
         <LinkStyled to="https://github.com/robfeulner" target="_blank">
@@ -34,6 +34,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0 50px;
+  margin-top: auto;
 `;
 
 const SuoniDiv = styled.div``;
@@ -99,6 +100,10 @@ const Archive = styled.h2`
   letter-spacing: 0.71em;
 
   color: #000000;
+`;
+
+const ScribbleImg = styled.img`
+max-width: 900px;;
 `;
 
 const IconDiv = styled.div`

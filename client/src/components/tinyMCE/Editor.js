@@ -23,12 +23,8 @@ const EditorBox = ({
 
   const editorRef = useRef();
   const currentdate = new Date();
-  console.log(account);
 
   const handleSubmit = (e) => {
-    //     // TODO: POST info to server
-    // e.preventDefault();
-    console.log(account);
     if (account) {
       const metaData = {
         formData: editorValue,
@@ -54,8 +50,6 @@ const EditorBox = ({
           }
           metaData._id = data._id;
           setComments([...comments, metaData]);
-
-          console.log(comments);
         })
         .catch((error) => {
           console.log(error);
@@ -88,8 +82,8 @@ const EditorBox = ({
               onEditorChange={(content) => setEditorValue(content)}
               src="https://cdn.tiny.cloud/1/c6x1ctzd41a98qg5899b6fjitt2chdevvp3xm8f2opni0cmx/tinymce/5/tinymce.min.js"
               referrerpolicy="origin"
-              plugins={["image", "media mediaembed"]}
-              mediaembed_max_width={[450]}
+              plugins={["image", "media", "mediaembed"]}
+              mediaembed_max_width={[650]}
               toolbar={[
                 { name: "history", items: ["undo", "redo"] },
                 { name: "styles", items: ["styleselect"] },
@@ -104,8 +98,7 @@ const EditorBox = ({
                   ],
                 },
                 { name: "indentation", items: ["outdent", "indent"] },
-                { name: "image", items: ["image"] },
-                { name: "media", items: ["media"] },
+                { name: "media", items: ["image", "media", "mediaembed"] },
               ]}
               image_list={[
                 {
@@ -127,8 +120,6 @@ const EditorBox = ({
             ) : (
               <Button type="submit">Submit Post</Button>
             )}
-            {/* <button onClick={handleClick}>Submit Post</button> */}
-            {/* {console.log(editorRef.current)} */}
           </form>
         </Wrapper>
       )}

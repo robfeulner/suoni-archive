@@ -28,7 +28,6 @@ const SearchBar = () => {
         });
         const uniqueArtists = [...new Set(allArtists)];
         setArtists(uniqueArtists);
-        // console.log(uniqueArtists);
       })
       .catch((error) => {
         console.log(error);
@@ -90,7 +89,6 @@ const SearchBar = () => {
                   <Li>{matchSuggestion}</Li>
                 </ListLink>
               ))}
-              {console.log(matchedSearch)}
             </ul>
           </SearchDiv>
         )}

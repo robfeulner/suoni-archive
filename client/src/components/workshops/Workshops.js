@@ -18,7 +18,6 @@ const Workshops = () => {
           throw new Error("Not good. Error.");
         }
         setArtists(data.data);
-        console.log(artists);
       })
 
       .catch((error) => {
@@ -29,14 +28,14 @@ const Workshops = () => {
   return (
     <>
       {!artists ? (
-        <Loading/>
+        <Loading />
       ) : (
         <>
           <Wrapper>
             {year ? (
               <ArtistWrapper>
                 <YearH1>{year}</YearH1>
-                
+
                 {artists
                   .filter((event) => event.year === year)
                   .map((event) =>
@@ -83,7 +82,6 @@ const YearH1 = styled.h1`
   font-size: 3em;
   margin-left: 30px;
 `;
-
 
 const RightWrapper = styled.div`
   display: flex;

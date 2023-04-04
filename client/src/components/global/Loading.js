@@ -11,17 +11,22 @@ const Loading = () => {
     }
     `;
 
+  const Wrapper = styled.div`
+    display: flex;
+    align-items: center;
+    align-content: center;
+  `;
+  
   const Img = styled.img`
     animation: ${Loading} 3s linear infinite;
-    margin: 20px 200px;
-    
+    margin: auto;
   `;
-
   return (
-    <>
+    <Wrapper>
       <Img src="/images/loadingscribble02.png" />
-    </>
+    </Wrapper>
   );
 };
+
 
 export default Loading;

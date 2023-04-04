@@ -1,3 +1,4 @@
+import { COLORS } from "../global/constants";
 import Loading from "../global/Loading";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
@@ -54,14 +55,10 @@ const Artists = () => {
       });
   }, []);
 
-  //.filter needs to access the date, and there should be an if condition on date to include 2006
-  //then in the .filter, do a .map for "artist", you MIGHT have to do a .map to get the names within "artist"
-  //then a .sort to get them in alphabetical order.
-
   return (
     <>
       {!artists ? (
-        <Loading/>
+        <Loading />
       ) : (
         <>
           <Wrapper>
@@ -70,7 +67,9 @@ const Artists = () => {
                 <>
                   <LetterH1>{letter}</LetterH1>
                   {artists
-                    .filter((name) => name.startsWith(letter))
+                    .filter((name) =>
+                      name.replace("The ", "").startsWith(letter)
+                    )
                     .map((name) => (
                       <div>
                         <StyledLink to={`/artist/${name}`}>
@@ -105,6 +104,7 @@ const Artists = () => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-left: 35px;
 `;
 
 const ArtistWrapper = styled.div`
@@ -134,10 +134,15 @@ const StyledLink = styled(Link)`
 
 const Name = styled.span`
   font-size: 1.5em;
+  color: black;
+
+  &:hover {
+    color: ${COLORS.blue};
+  }
 `;
 
 const ChooseWrapper = styled.div`
-  margin-left: 30px;
+  
 `;
 const ChooseSpan = styled.span`
   font-size: 2em;

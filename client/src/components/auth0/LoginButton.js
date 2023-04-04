@@ -9,7 +9,7 @@ const LoginButton = () => {
       <>
         <Button onClick={() => loginWithRedirect()}>
           Click here to sign in
-      </Button>
+        </Button>
       </>
     )
   );
@@ -22,6 +22,8 @@ const Button = styled.button`
   padding: 3px 10px;
   border: 2px ${COLORS.blue} solid;
   cursor: pointer;
+  z-index: 100;
+  transform: translateX(1px);
 
   &:hover {
     color: ${COLORS.red};

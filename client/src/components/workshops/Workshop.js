@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import EditorBox from "../tinyMCE/Editor";
 import Comments from "../tinyMCE/Comments";
+import Loading from "../global/Loading";
 
 const Workshop = () => {
   const [artists, setArtists] = useState(null);
@@ -32,7 +33,9 @@ const Workshop = () => {
   return (
     <>
       {!artists ? (
-        <>Loading...</>
+        <>
+          <Loading />
+        </>
       ) : (
         <>
           <Wrapper>

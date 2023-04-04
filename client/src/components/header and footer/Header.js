@@ -7,6 +7,7 @@ import LogoutButton from "../auth0/LogoutButton";
 import Profile from "../auth0/Profile";
 import Scribble from "./Scribble";
 import HeaderScribble from "../images/HeaderScribble";
+import Back from "./Back";
 
 import { useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -17,7 +18,7 @@ const Header = () => {
   const { isLoading, error } = useAuth0;
   const { account } = useContext(UserContext);
   const [image, setImage] = useState();
-  console.log(image);
+  
 
   const handleClick = (event) => {
     setImage(event.target.innerText);
@@ -80,6 +81,7 @@ const Header = () => {
             </Links>
             <SearchBar />
           </BottomRow>
+          <Back />
         </>
       )}
     </Wrapper>
@@ -89,7 +91,8 @@ const Header = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  /* margin-top: -20px; */
+  margin-top: -20px;
+  margin-bottom: 30px;
 `;
 
 const SignInDiv = styled.div`
@@ -106,6 +109,7 @@ const MainRow = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: -50px;
+  margin-bottom: -20px;
 `;
 
 const SuoniWrapper = styled.div`
@@ -182,6 +186,7 @@ const StyledLink = styled(NavLink)`
 const BottomRow = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
 `;
 
 const Img = styled.img``;

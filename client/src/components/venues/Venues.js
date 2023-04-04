@@ -13,7 +13,7 @@ const Venues = () => {
         if (data.status === 400 || data.status === 500) {
           throw new Error("Not good. Error.");
         }
-        console.log(data.data);
+
         const venueNames = data.data.flatMap((year) =>
           year.events.map((event) => event.venue)
         );
@@ -31,7 +31,7 @@ const Venues = () => {
   return (
     <>
       {!venue ? (
-        <Loading/>
+        <Loading />
       ) : (
         <>
           <Wrapper>

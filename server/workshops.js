@@ -67,10 +67,10 @@ const workshops = [
       {
         _id: uuidv4(),
         name: "Colloquium on Improvisation",
-        date: ["2008-06-21", "2007-08-22"],
+        date: "2008-06-21",
         venue: "La Sala Rossa",
         description:
-          "A McGill University and Suoni Per Il Popolo co-presentation. This year's theme: 'Text, Media, and Improvisation'. Featured speakers include: Roscoe Mitchell, George Lewis (AACM), Georgina Born (Henry Cow & founding member of F.I.G.), and Charity Chan.",
+          "A McGill University and Suoni Per Il Popolo co-presentation. This year's theme: 'Text, Media, and Improvisation'. Featured speakers include: Roscoe Mitchell, George Lewis (AACM), Georgina Born (Henry Cow & founding member of F.I.G.), and Charity Chan. This event spans June 21st and June 22nd, 2008.",
       },
       {
         _id: uuidv4(),
