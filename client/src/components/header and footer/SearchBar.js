@@ -56,17 +56,11 @@ const SearchBar = () => {
 
   return (
     <Wrapper>
-      {/* Expansion of search bar */}
       <InputWrapper>
         <Input
           placeholder="Search Artist"
           value={value}
           onChange={(ev) => setValue(ev.target.value)}
-          //   onKeyDown={(ev) => {
-          // if (ev.key === "Enter") {
-          //     handleSelect(ev.target.value);
-          //   setValue("");
-          // }
           // onBlur={() => {
           //   setTimeout(() => {
           //     setValue("");

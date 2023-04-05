@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const LettersList = ({ setLetter }) => {
+  // Sets artist letter
+
   const handleClick = (event) => {
     setLetter(event.target.innerText);
   };

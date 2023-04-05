@@ -1,5 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
+// Spinning "loading" icon
+
 const Loading = () => {
   const Loading = keyframes`
     from{
@@ -16,7 +18,7 @@ const Loading = () => {
     align-items: center;
     align-content: center;
   `;
-  
+
   const Img = styled.img`
     animation: ${Loading} 3s linear infinite;
     margin: auto;
@@ -27,6 +29,5 @@ const Loading = () => {
     </Wrapper>
   );
 };
-
 
 export default Loading;

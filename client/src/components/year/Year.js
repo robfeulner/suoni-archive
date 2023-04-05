@@ -41,7 +41,6 @@ const Year = () => {
                 <YearH1>{year}</YearH1>
                 {artists
                   .filter((event) => event.year === year)
-
                   .map((event) =>
                     event.events.slice(startIndex, endIndex).map((event) => (
                       <div key={event._id}>
@@ -63,11 +62,11 @@ const Year = () => {
               </>
             )}
             <RightWrapper>
+              {/* Pagination begins */}
               {!year ? (
                 <></>
               ) : (
                 <PageDiv>
-                  {/* <button onClick={() => setPage(1)}>Page 1</button> */}
                   <Button
                     disabled={page === 1}
                     onClick={() => setPage(page - 1)}
@@ -76,13 +75,19 @@ const Year = () => {
                   </Button>
                   <Span>{page}</Span>
                   <Button
-                    disabled={endIndex >= artists[0].events.length}
+                    disabled={
+                      endIndex >=
+                      artists
+                        .filter((event) => event.year === year)
+                        .map((event) => event.events)[0].length
+                    }
                     onClick={() => setPage(page + 1)}
                   >
                     Next Page
                   </Button>
                 </PageDiv>
               )}
+              {/* Pagination ends */}
               <YearList
                 year={year}
                 setYear={setYear}

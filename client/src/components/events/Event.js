@@ -4,18 +4,21 @@ import EditorBox from "../tinyMCE/Editor";
 import Comments from "../tinyMCE/Comments";
 import DisqusEditor from "../tinyMCE/DisqusEditor";
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import moment from "moment";
 
 const Event = () => {
   const [artists, setArtists] = useState(null);
-  const { eventId } = useParams();
   const [comments, setComments] = useState([]);
+  const { eventId } = useParams();
 
   //Allows me to look through out all the years in my data
 
   const flatEvent = artists?.flatMap((year) => year.events);
   const findEvent =
     flatEvent && flatEvent.find((event) => event._id === eventId);
+
+  //Get list of event objects
 
   useEffect(() => {
     fetch(`/get-events`)
@@ -39,16 +42,27 @@ const Event = () => {
       ) : (
         <>
           <Wrapper>
+            {/* Event info with ticket background */}
             <EventWrapper>
-              <EventDetailsWrapper key={findEvent._id}>
-                <EventH2>{findEvent.artist.join(" + ")}</EventH2>
-
-                <P>{findEvent.date}</P>
-                <P>{findEvent.venue}</P>
-                <P>{findEvent.price}</P>
-                <P>{findEvent.description}</P>
-              </EventDetailsWrapper>
+              <TicketDiv>
+                <EventText key={findEvent._id}>
+                  <EventNameDiv>
+                    <EventH2>{findEvent.artist.join(" + ")}</EventH2>
+                  </EventNameDiv>
+                  <EventDateDiv>
+                    <P>{moment(findEvent.date).format("MMMM Do YYYY")}</P>
+                  </EventDateDiv>
+                  <VenuePriceDiv>
+                    <P>{findEvent.venue}</P>
+                    <P>{findEvent.price}</P>
+                  </VenuePriceDiv>
+                </EventText>
+              </TicketDiv>
             </EventWrapper>
+            <EventDescriptionDiv>
+              <P>{findEvent.description}</P>
+            </EventDescriptionDiv>
+
             <EditorBox
               page={"events"}
               urlId={"eventId"}
@@ -76,7 +90,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   max-width: 1200px;
   margin: auto;
-  /* align-items: center; */
 `;
 
 const EventWrapper = styled.div`
@@ -84,22 +97,51 @@ const EventWrapper = styled.div`
   justify-content: center;
 `;
 
-const EventDetailsWrapper = styled.div`
+const TicketDiv = styled.div`
+  height: 424px;
+  width: 1200px;
+  background-image: url("/images/ticket02.png");
+`;
+
+const EventText = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  width: fit-content;
-  border: 2px dotted grey;
-  border-radius: 15px;
-  min-width: 1200px;
-  margin: 30px 0;
+  justify-content: space-between;
+  height: 67%;
+  margin-left: 10%;
 `;
 
-const EventH2 = styled.h2``;
+const EventNameDiv = styled.div`
+  font-size: 2em;
+  margin-top: 20px;
+  text-align: center;
+`;
+
+const EventDateDiv = styled.div`
+  margin-top: -10px;
+`;
+
+const VenuePriceDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 100px;
+  margin-top: -15px;
+`;
+
+const EventDescriptionDiv = styled.div`
+  text-align: center;
+`;
+
+const EventH2 = styled.h2`
+  font-size: 1.33em;
+  mix-blend-mode: hard-light;
+`;
 
 const P = styled.p`
-  font-size: 1.5em;
+  font-size: 2em;
+  font-weight: bolder;
+  opacity: 80%;
 `;
 
 export default Event;

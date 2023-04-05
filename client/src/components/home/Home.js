@@ -33,9 +33,9 @@ const Home = () => {
         </P>
         <UpdateDiv>
           <P>
-            Update: April 11th 2023: Soft launch complete. All shows for 2006
-            and 2010 are listed, with partial data for 2007-2009 done. More to
-            come! - 🧡 Rob
+            Update April 11th 2023: Soft launch complete. All shows for 2006 and
+            2010 are listed, with partial data for 2007-2009 done. More to come!
+            - 🧡 Rob
           </P>
         </UpdateDiv>
       </InfoDiv>
@@ -56,7 +56,6 @@ const Header = styled.div`
 const H1Top = styled.h1`
   font-size: 9em;
   color: ${COLORS.red};
-
   text-shadow: 10px 6px 0px ${COLORS.blue};
 `;
 

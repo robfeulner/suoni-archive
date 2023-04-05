@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { COLORS } from "../global/constants";
 import { Editor } from "@tinymce/tinymce-react";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { UserContext } from "../auth0/CurrentUserContext";
 
 const EditorBox = ({
@@ -14,16 +14,17 @@ const EditorBox = ({
   comments,
   setComments,
 }) => {
-  const [error, setError] = useState();
   const [editorValue, setEditorValue] = useState(null);
   const { account } = useContext(UserContext);
 
   const params = useParams();
-  const navigate = useNavigate();
 
   const editorRef = useRef();
+
+  //Moment 'date' conversion
   const currentdate = new Date();
 
+  //POST comment function
   const handleSubmit = (e) => {
     if (account) {
       const metaData = {
@@ -57,10 +58,6 @@ const EditorBox = ({
     }
   };
 
-  const handleClick = () => {
-    setEditorValue("");
-  };
-
   return (
     <>
       {!account ? (
@@ -76,6 +73,7 @@ const EditorBox = ({
             </h2>
           </H2Wrapper>
           <form onSubmit={handleSubmit}>
+            {/* TinyMCE rich-text editor box */}
             <Editor
               apiKey="c6x1ctzd41a98qg5899b6fjitt2chdevvp3xm8f2opni0cmx"
               onInit={(evt, editor) => (editorRef.current = editor)}
@@ -137,10 +135,6 @@ const Wrapper = styled.div`
 
 const H2Wrapper = styled.div`
   margin: auto;
-`;
-
-const EventSpan = styled.span`
-  color: ${COLORS.red};
 `;
 
 const Button = styled.button`

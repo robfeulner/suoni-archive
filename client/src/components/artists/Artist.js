@@ -7,8 +7,10 @@ import moment from "moment";
 const Artist = () => {
   const [artists, setArtists] = useState(null);
   const { artistId } = useParams();
-  
 
+  //This page lists all the events performed by a single artist
+
+  //GET events from server
   useEffect(() => {
     fetch(`/get-events`)
       .then((res) => res.json())
@@ -17,7 +19,6 @@ const Artist = () => {
           throw new Error("Not good. Error.");
         }
         setArtists(data.data);
-        // console.log(artists);
       })
       .catch((error) => {
         console.log(error);
@@ -34,6 +35,8 @@ const Artist = () => {
             <ArtistWrapper>
               <ArtistH1>{artistId}</ArtistH1>
             </ArtistWrapper>
+
+            {/* Filter artist name from event list, map artist info */}
 
             {artists
               .filter((artist) =>
@@ -95,19 +98,8 @@ const ArtistWrapper = styled.div`
   flex-direction: column;
 `;
 
-const BackLink = styled(Link)`
-  text-decoration: none;
-
-  &:visited {
-    color: red;
-  }
+const RightWrapper = styled.p`
+  margin: auto 0;
 `;
-
-const BackP = styled.p`
-  font-size: 1.5em;
-  color: red;
-`;
-
-const RightWrapper = styled.p``;
 
 export default Artist;

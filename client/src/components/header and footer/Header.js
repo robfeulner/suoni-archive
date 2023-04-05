@@ -1,14 +1,11 @@
-import { COLORS } from "../global/constants";
 import styled from "styled-components";
-import { Link, NavLink } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import LoginButton from "../auth0/LoginButton";
-import LogoutButton from "../auth0/LogoutButton";
 import Profile from "../auth0/Profile";
 import Scribble from "./Scribble";
-import HeaderScribble from "../images/HeaderScribble";
 import Back from "./Back";
-
+import { COLORS } from "../global/constants";
+import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { UserContext } from "../auth0/CurrentUserContext";
@@ -17,9 +14,10 @@ import { useState } from "react";
 const Header = () => {
   const { isLoading, error } = useAuth0;
   const { account } = useContext(UserContext);
+  //Changes 'scribble' image
   const [image, setImage] = useState();
-  
 
+  //Triggers scribble image
   const handleClick = (event) => {
     setImage(event.target.innerText);
   };
@@ -30,6 +28,7 @@ const Header = () => {
 
   return (
     <Wrapper>
+      {/* Auth0 login button or Profile */}
       {error && <span>Authentication Error</span>}
       {!error && isLoading && <span>Loading....</span>}
       {!error && !isLoading && (
@@ -37,7 +36,6 @@ const Header = () => {
           {!account ? (
             <>
               <SignInDiv>
-                {/* <SignInSpan>Click here to sign in →</SignInSpan> */}
                 <LoginButton />
               </SignInDiv>
             </>
@@ -47,6 +45,7 @@ const Header = () => {
             </>
           )}
           <MainRow>
+            {/* Suoni Per Il Popolo text */}
             <SuoniLink to="/" onClick={handleHome}>
               <SuoniWrapper>
                 <SuoniWrapper2>
@@ -62,9 +61,11 @@ const Header = () => {
                 <P>ARCHIVE</P>
               </SuoniWrapper>
             </SuoniLink>
+            {/* Scribble */}
             <Scribble image={image} setImage={setImage} />
           </MainRow>
           <BottomRow>
+            {/* Links */}
             <Links>
               <StyledLink to="/years">
                 <H2 onClick={handleClick}>Year</H2>
@@ -79,6 +80,7 @@ const Header = () => {
                 <H2>Workshops</H2>
               </StyledLink>
             </Links>
+            {/* Search input */}
             <SearchBar />
           </BottomRow>
           <Back />
@@ -97,10 +99,6 @@ const Wrapper = styled.div`
 
 const SignInDiv = styled.div`
   align-self: flex-end;
-`;
-
-const SignInSpan = styled.span`
-  font-size: 1.25em;
 `;
 
 const MainRow = styled.div`

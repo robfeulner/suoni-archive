@@ -8,11 +8,11 @@ import { Link } from "react-router-dom";
 const Artists = () => {
   //Applying data
   const [artists, setArtists] = useState(null);
-  //Removing "The" for the alphabetical order
-  const [noThe, setNoThe] = useState(null);
+
   //Choosing your letter
   const [letter, setLetter] = useState("");
 
+  //GET all artist names
   useEffect(() => {
     fetch(`/get-events`)
       .then((res) => res.json())
@@ -21,13 +21,18 @@ const Artists = () => {
           throw new Error("Not good. Error.");
         }
 
+        //Push artists into an array
         let allArtists = [];
         const rearrangedArtists = data.data.map((ev) => {
           return ev.events.map((item) => {
             allArtists.push(...item.artist);
           });
         });
+
+        //Remove duplicates
         const uniqueArtists = [...new Set(allArtists)];
+
+        //Remove "The" from artist name
         const noTheArray = uniqueArtists
           .map((name) => {
             if (name.includes("The ")) {
@@ -87,6 +92,8 @@ const Artists = () => {
               )}
             </ArtistWrapper>
             <RightWrapper>
+              {/* List of letters */}
+
               <LettersList
                 artists={artists}
                 setArtists={setArtists}
@@ -141,9 +148,7 @@ const Name = styled.span`
   }
 `;
 
-const ChooseWrapper = styled.div`
-  
-`;
+const ChooseWrapper = styled.div``;
 const ChooseSpan = styled.span`
   font-size: 2em;
   color: black;

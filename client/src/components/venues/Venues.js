@@ -35,15 +35,20 @@ const Venues = () => {
       ) : (
         <>
           <Wrapper>
-            <ArtistWrapper>
-              {venue.map((name) => (
-                <div>
-                  <VenueLink to={`/venues/${name}`}>
-                    <VenueH2>{name}</VenueH2>
-                  </VenueLink>
-                </div>
-              ))}
-            </ArtistWrapper>
+            <LeftWrapper>
+              <ArtistWrapper>
+                {venue.map((name) => (
+                  <div>
+                    <VenueLink to={`/venues/${name}`}>
+                      <VenueH2>{name}</VenueH2>
+                    </VenueLink>
+                  </div>
+                ))}
+              </ArtistWrapper>
+            </LeftWrapper>
+            <RightWrapper>
+              <img src="/images/scribble12.png" alt="scribble" />
+            </RightWrapper>
           </Wrapper>
         </>
       )}
@@ -54,6 +59,13 @@ const Venues = () => {
 const Wrapper = styled.div`
   display: flex;
   margin-left: 35px;
+  justify-content: space-between;
+`;
+
+const LeftWrapper = styled.div``;
+
+const RightWrapper = styled.div`
+margin: auto 0;
 `;
 
 const ArtistWrapper = styled.div`

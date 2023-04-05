@@ -7,8 +7,9 @@ const UserContextProvider = ({ children }) => {
   const { user, isAuthenticated } = useAuth0();
   const [account, setAccount] = useState(null);
 
+  // Allows the logged in user to be accessible in all code under the value 'account'
+
   useEffect(() => {
-    // TODO: POST info to server
     if (user) {
       fetch("/add-users", {
         method: "POST",
