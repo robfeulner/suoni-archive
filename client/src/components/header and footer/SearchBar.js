@@ -61,12 +61,6 @@ const SearchBar = () => {
           placeholder="Search Artist"
           value={value}
           onChange={(ev) => setValue(ev.target.value)}
-          // onBlur={() => {
-          //   setTimeout(() => {
-          //     setValue("");
-          //   }, 400);
-          // }}
-          // onFocus={handleEvent}
           onFocus={handleEvent}
           onBlur={handleBlur}
           ref={inputRef}
@@ -116,8 +110,6 @@ const Li = styled.li`
   padding: 0 10px;
   font-size: 1.2em;
   &:hover {
-    /* background-color: ${COLORS.red};
-    border-radius: 25px; */
     font-style: italic;
     text-shadow: 2px 4px 0px #ea0000;
   }

@@ -8,8 +8,11 @@ import Loading from "../global/Loading";
 const Workshops = () => {
   const [artists, setArtists] = useState(null);
   const [year, setYear] = useState(null);
+
+  //Pagination not used but required for YearList
   const [page, setPage] = useState(1);
 
+  //GET list of all workshops from data
   useEffect(() => {
     fetch(`/get-workshops`)
       .then((res) => res.json())
@@ -35,10 +38,11 @@ const Workshops = () => {
             {year ? (
               <ArtistWrapper>
                 <YearH1>{year}</YearH1>
-
+                {/* Match workshop to year */}
                 {artists
                   .filter((event) => event.year === year)
                   .map((event) =>
+                    // Map all workshops with matching year
                     event.events.map((event) => (
                       <div key={event._id}>
                         <EventLink to={`/workshops/${event._id}`}>

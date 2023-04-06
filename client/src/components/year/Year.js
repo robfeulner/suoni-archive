@@ -14,6 +14,7 @@ const Year = () => {
   const startIndex = (page - 1) * 15;
   const endIndex = startIndex + 15;
 
+  //GET all events
   useEffect(() => {
     fetch(`/get-events`)
       .then((res) => res.json())
@@ -39,8 +40,10 @@ const Year = () => {
             {year ? (
               <EventWrapper>
                 <YearH1>{year}</YearH1>
+                {/* Filter events by year */}
                 {artists
                   .filter((event) => event.year === year)
+                  // Map all events for that year, with slice for pagination
                   .map((event) =>
                     event.events.slice(startIndex, endIndex).map((event) => (
                       <div key={event._id}>

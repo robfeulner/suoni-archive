@@ -33,9 +33,8 @@ const Home = () => {
         </P>
         <UpdateDiv>
           <P>
-            Update April 11th 2023: Soft launch complete. All shows for 2006 and
-            2010 are listed, with partial data for 2007-2009 done. More to come!
-            - 🧡 Rob
+            Update April 11th 2023: Soft launch complete. All shows between 2006
+            and 2010 have been listed. More to come! - 🧡 Rob
           </P>
         </UpdateDiv>
       </InfoDiv>

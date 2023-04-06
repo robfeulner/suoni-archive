@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import EditorBox from "../tinyMCE/Editor";
 import Comments from "../tinyMCE/Comments";
 import Loading from "../global/Loading";
@@ -75,7 +75,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   max-width: 1200px;
   margin: auto;
-  /* align-items: center; */
 `;
 
 const EventWrapper = styled.div`

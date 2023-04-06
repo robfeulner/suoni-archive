@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 const Venues = () => {
   const [venue, setVenue] = useState(null);
 
+  //GET complete list of unique venues from data
+
   useEffect(() => {
     fetch(`/get-events`)
       .then((res) => res.json())
@@ -36,6 +38,7 @@ const Venues = () => {
         <>
           <Wrapper>
             <LeftWrapper>
+              {/* Listing venues */}
               <ArtistWrapper>
                 {venue.map((name) => (
                   <div>
@@ -46,6 +49,7 @@ const Venues = () => {
                 ))}
               </ArtistWrapper>
             </LeftWrapper>
+            {/* Scribble */}
             <RightWrapper>
               <img src="/images/scribble12.png" alt="scribble" />
             </RightWrapper>
@@ -65,7 +69,7 @@ const Wrapper = styled.div`
 const LeftWrapper = styled.div``;
 
 const RightWrapper = styled.div`
-margin: auto 0;
+  margin: auto 0;
 `;
 
 const ArtistWrapper = styled.div`

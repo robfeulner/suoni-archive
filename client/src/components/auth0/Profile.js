@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
-import LoginButton from "../auth0/LoginButton";
 import LogoutButton from "../auth0/LogoutButton";
-import { useState, useEffect } from "react";
 
 const Profile = () => {
   const { user, isAuthenticated } = useAuth0();
-
+  // Gives user info after logged in
   return isAuthenticated ? (
     <Wrapper>
       <DivTop>
@@ -35,12 +33,12 @@ const Wrapper = styled.div`
 `;
 
 const DivTop = styled.div`
-display: flex;
-align-items: center;
+  display: flex;
+  align-items: center;
 `;
 
 const DivBottom = styled.div`
-margin-top: -15px;
+  margin-top: -15px;
 `;
 
 const Span = styled.span`

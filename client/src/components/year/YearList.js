@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-const YearList = ({ year, setYear, artists, setPage }) => {
+const YearList = ({ setYear, artists, setPage }) => {
+
+  // sets Year to the year clicked, resets page to 1
   const handleClick = (event) => {
     setYear(parseInt(event.target.innerText));
     setPage(1);

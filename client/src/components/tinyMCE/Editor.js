@@ -19,6 +19,7 @@ const EditorBox = ({
 
   const params = useParams();
 
+  //Needed for TinyMCE editing box
   const editorRef = useRef();
 
   //Moment 'date' conversion
@@ -111,6 +112,7 @@ const EditorBox = ({
             />
             {!editorValue ? (
               <>
+                {/* Only submits if there is value in the input */}
                 <Button disabled type="submit">
                   Submit Post
                 </Button>

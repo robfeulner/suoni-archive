@@ -8,6 +8,8 @@ const Venue = () => {
   const { venueId } = useParams();
   const [artists, setArtists] = useState(null);
   const [year, setYear] = useState(null);
+
+  //No pagination on Venue but required for YearList
   const [page, setPage] = useState(null);
 
   useEffect(() => {
@@ -22,7 +24,7 @@ const Venue = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [page]);
+  }, []);
 
   return (
     <>
@@ -33,17 +35,19 @@ const Venue = () => {
           {year ? (
             <EventWrapper>
               <VenueH1>{venueId}</VenueH1>
+              {/* Filtering by year */}
               {artists
                 .filter((event) => event.year === year)
+                // Matching to venue
                 .filter((artist) =>
                   artist.events.some((event) => event.venue === venueId)
                 )
+                // Mapping all performance in that venue, in that year
                 .map((artist) =>
                   artist.events
                     .filter((event) => event.venue === venueId)
 
                     .map((event) => (
-                      // {venue.length < 1 ? (<>No events</>) : (<>
                       <div key={event._id}>
                         <EventLink to={`/events/${event._id}`}>
                           <EventH2>{event.artist.join(" + ")}</EventH2>
@@ -52,7 +56,6 @@ const Venue = () => {
                         <P>{event.venue}</P>
                         <P>{event.price}</P>
                       </div>
-                      // </>)}
                     ))
                 )}
               {artists
@@ -102,9 +105,9 @@ const VenueH1 = styled.h1`
 `;
 
 const H1 = styled.h1`
-color: black;
-font-style: italic;
-`
+  color: black;
+  font-style: italic;
+`;
 
 const RightWrapper = styled.div`
   display: flex;
