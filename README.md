@@ -1,6 +1,6 @@
 # Suoni Per Il Popolo Archive
 
-![scribble](https://i.imgur.com/J0zghTE.png)
+![scribble](https://imgur.com/RsSmbij.png)
 
 
 
