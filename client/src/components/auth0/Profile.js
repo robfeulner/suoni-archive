@@ -14,7 +14,7 @@ const Profile = () => {
             {user.email === "kennedycurse@gmail.com" ? <>✨</> : <></>}
           </Span>
         )}
-        {user?.picture && <Img src={user.picture} alt={user?.name} />}
+        {/* {user?.picture && <Img src={user.picture} alt={user?.name} />} */}
       </DivTop>
       <DivBottom>
         <LogoutButton />

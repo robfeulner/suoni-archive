@@ -71,6 +71,7 @@ const Venue = () => {
           ) : (
             <>
               <ChooseWrapper>
+                <VenueH1>{venueId}</VenueH1>
                 <ChooseSpan>Choose a year</ChooseSpan>
               </ChooseWrapper>
             </>
@@ -123,6 +124,7 @@ const ChooseSpan = styled.span`
   font-size: 2em;
   color: black;
   font-weight: bold;
+  margin-left: 30px;
 `;
 
 const EventLink = styled(Link)`

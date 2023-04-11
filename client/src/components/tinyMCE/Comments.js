@@ -48,7 +48,7 @@ const Comments = ({ page, urlId, comments, setComments }) => {
 
   return (
     <>
-      {!account ? (
+      {!comments ? (
         <>
           <Loading />
         </>
@@ -76,7 +76,7 @@ const Comments = ({ page, urlId, comments, setComments }) => {
                           </ItalicsSpan>
                         </span>
                         {/* Trash icon visible if admin logged in */}
-                        {account.email === "kennedycurse@gmail.com" ? (
+                        {account && account.email === "kennedycurse@gmail.com" ? (
                           <TrashDiv>
                             <FiTrash2Styled
                               onClick={() => handleClick(comment._id)}
