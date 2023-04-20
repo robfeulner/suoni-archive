@@ -3,14 +3,24 @@
 // import the needed node_modules.
 const express = require("express");
 const morgan = require("morgan");
-// const cors = require("cors");
+const cors = require("cors");
+// const helmet = require("helmet");
 // const port = 8888;
 const port = process.env.PORT || 8888;
 
 const app = express();
-// const helmet = require("helmet");
 
 require("dotenv").config();
+
+const cors = require("cors")
+  .use(cors())
+  .use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Methods: *");
+    res.header("Allow: *");
+    next();
+  });
 
 const {
   getEvents,
