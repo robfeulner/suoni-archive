@@ -60,7 +60,11 @@ express()
   .use(express.json())
   .use(express.urlencoded({ extended: false }))
   .use("/", express.static(__dirname + "/"))
-  .use(cors());
+  .use(
+    cors({
+      origin: "https://suoni-archive-server.vercel.app",
+    })
+  );
 
 app.get("/test", (req, res) => {
   res.status(200).json({ itWorked: true });
