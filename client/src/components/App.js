@@ -5,14 +5,13 @@ import Footer from "./header and footer/Footer";
 import Home from "./home/Home";
 import Artists from "./artists/Artists";
 import Artist from "./artists/Artist";
-import Event from "./events/Event";
+import Event from "./Events/Event";
 import Year from "./year/Year";
 import Venues from "./venues/Venues";
 import Venue from "./venues/Venue";
 import Workshops from "./workshops/Workshops";
 import Workshop from "./workshops/Workshop";
 import GlobalStyles from "./global/GlobalStyles";
-
 
 const App = () => {
   return (
