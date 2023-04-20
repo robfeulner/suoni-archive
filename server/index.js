@@ -3,12 +3,12 @@
 // import the needed node_modules.
 const express = require("express");
 const morgan = require("morgan");
-const cors = require("cors");
+// const cors = require("cors");
 // const port = 8888;
 const port = process.env.PORT || 8888;
 
 const app = express();
-const helmet = require("helmet");
+// const helmet = require("helmet");
 
 require("dotenv").config();
 
@@ -28,8 +28,8 @@ const {
 // This will give us will log more info to the console. see https://www.npmjs.com/package/morgan
 app.use(morgan("tiny"));
 app.use(express.json());
-app.use(helmet());
-app.use(cors());
+// app.use(helmet());
+// app.use(cors());
 
 app.get("/test", (req, res) => {
   res.status(200).json({ itWorked: true });
