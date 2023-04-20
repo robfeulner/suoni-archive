@@ -30,6 +30,7 @@ const {
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use(helmet());
+app.use(cors());
 
 app.get("/test", (req, res) => {
   res.status(200).json({ itWorked: true });
