@@ -13,6 +13,7 @@ const Event = () => {
   const { eventId } = useParams();
 
   //Allows me to look through out all the years in my data
+  // Fake line
 
   const flatEvent = artists?.flatMap((year) => year.events);
   const findEvent =
