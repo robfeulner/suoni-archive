@@ -1,6 +1,4 @@
-import { cors } from "cors";
-
-("use strict");
+"use strict";
 
 // import the needed node_modules.
 const express = require("express");
@@ -8,8 +6,8 @@ const morgan = require("morgan");
 const cors = require("cors");
 // const helmet = require("helmet");
 // const port = 8888;
-// const port = process.env.PORT || 8888;
-const port = process.env.PORT;
+const port = process.env.PORT || 8888;
+
 const path = require("path");
 
 const app = express();
