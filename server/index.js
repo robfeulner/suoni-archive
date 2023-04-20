@@ -8,6 +8,7 @@ const cors = require("cors");
 const port = process.env.PORT || 8888;
 
 const app = express();
+const helmet = require("helmet");
 
 require("dotenv").config();
 
@@ -28,6 +29,7 @@ const {
 // This will give us will log more info to the console. see https://www.npmjs.com/package/morgan
 app.use(morgan("tiny"));
 app.use(express.json());
+app.use(helmet());
 
 app.get("/test", (req, res) => {
   res.status(200).json({ itWorked: true });
