@@ -220,5 +220,5 @@ module.exports = {
   deleteComment,
   getUsers,
   addUser,
-  allowCors,
+  // allowCors,
 };
