@@ -47,7 +47,8 @@ const getEvents = async (req, res) => {
     await client.connect();
     const db = client.db("suoni");
     const result = await db.collection("events").find().toArray();
-
+    res.header("Access-Control-Allow-Origin", "*");
+    
     res.status(200).json({ status: 200, _id, data: result });
     client.close();
   } catch (err) {
