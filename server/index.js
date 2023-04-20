@@ -1,4 +1,6 @@
-"use strict";
+import { cors } from "cors";
+
+("use strict");
 
 // import the needed node_modules.
 const express = require("express");
