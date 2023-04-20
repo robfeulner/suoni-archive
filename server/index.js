@@ -20,7 +20,6 @@ const {
   addComment,
   getComments,
   deleteComment,
-  allowCors,
 } = require("./handlers");
 
 // Below are methods that are included in express(). We chain them for convenience.
