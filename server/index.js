@@ -4,7 +4,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-// const helmet = require("helmet");
+const helmet = require("helmet");
 // const port = 8888;
 const port = process.env.PORT || 8888;
 
@@ -13,8 +13,6 @@ const path = require("path");
 const app = express();
 
 require("dotenv").config();
-
-// const cors = require("cors")
 
 const {
   getEvents,
@@ -64,7 +62,8 @@ express()
     cors({
       origin: "https://suoni-archive-server.vercel.app",
     })
-  );
+  )
+  .use(helmet());
 
 app.get("/test", (req, res) => {
   res.status(200).json({ itWorked: true });
