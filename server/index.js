@@ -13,14 +13,6 @@ const app = express();
 require("dotenv").config();
 
 // const cors = require("cors")
-app.use(cors());
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  res.header("Access-Control-Allow-Methods: *");
-  res.header("Allow: *");
-  next();
-});
 
 const {
   getEvents,
@@ -38,6 +30,14 @@ const {
 // This will give us will log more info to the console. see https://www.npmjs.com/package/morgan
 app.use(morgan("tiny"));
 app.use(express.json());
+app.use(cors());
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Methods: *");
+  res.header("Allow: *");
+  next();
+});
 // app.use(helmet());
 // app.use(cors());
 
