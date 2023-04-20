@@ -5,7 +5,7 @@ import Footer from "./header and footer/Footer";
 import Home from "./home/Home";
 import Artists from "./artists/Artists";
 import Artist from "./artists/Artist";
-import Event from "./Events/Event";
+import Event from "./events/Event";
 import Year from "./year/Year";
 import Venues from "./venues/Venues";
 import Venue from "./venues/Venue";
