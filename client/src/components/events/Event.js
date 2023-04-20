@@ -21,7 +21,7 @@ const Event = () => {
   //Get list of event objects
 
   useEffect(() => {
-    fetch(`/get-events`)
+    fetch(`${process.env.REACT_APP_BASE_URL}/get-events`)
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 400 || data.status === 500) {

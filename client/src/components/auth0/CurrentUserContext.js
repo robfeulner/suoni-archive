@@ -11,7 +11,7 @@ const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      fetch("/add-users", {
+      fetch(`${process.env.REACT_APP_BASE_URL}/add-users`, {
         method: "POST",
         headers: {
           Accept: "application/json",

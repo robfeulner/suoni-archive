@@ -13,7 +13,7 @@ const Comments = ({ page, urlId, comments, setComments }) => {
   //GET all comments for particular event
 
   useEffect(() => {
-    fetch(`/get-comments`)
+    fetch(`${process.env.REACT_APP_BASE_URL}/get-comments`)
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 400 || data.status === 500) {
@@ -28,7 +28,7 @@ const Comments = ({ page, urlId, comments, setComments }) => {
 
   //Comment delete function
   const handleClick = (commentId) => {
-    fetch(`/delete-comment/${commentId}`, { method: "DELETE" })
+    fetch(`${process.env.REACT_APP_BASE_URL}/delete-comment/${commentId}`, { method: "DELETE" })
       .then((data) => {
         if (data.status === 400 || data.status === 500) {
           throw new Error("Not good. Error.");

@@ -9,7 +9,7 @@ const Venues = () => {
   //GET complete list of unique venues from data
 
   useEffect(() => {
-    fetch(`/get-events`)
+    fetch(`${process.env.REACT_APP_BASE_URL}/get-events`)
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 400 || data.status === 500) {

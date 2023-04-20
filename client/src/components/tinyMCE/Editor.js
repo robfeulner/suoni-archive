@@ -37,7 +37,7 @@ const EditorBox = ({
         post_type: page,
         date: currentdate,
       };
-      fetch("/add-comment", {
+      fetch(`${process.env.REACT_APP_BASE_URL}/add-comment`, {
         method: "POST",
         headers: {
           Accept: "application/json",
