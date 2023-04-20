@@ -6,7 +6,8 @@ const morgan = require("morgan");
 const cors = require("cors");
 // const helmet = require("helmet");
 // const port = 8888;
-const port = process.env.PORT || 8888;
+// const port = process.env.PORT || 8888;
+const port = process.env.PORT;
 
 const app = express();
 
