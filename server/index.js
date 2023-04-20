@@ -41,29 +41,28 @@ const {
 // app.use(helmet());
 // app.use(cors());
 
-express()
-  .use(function (req, res, next) {
-    res.header(
-      "Access-Control-Allow-Methods",
-      "OPTIONS, HEAD, GET, PUT, POST, DELETE"
-    );
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
+express().use(function (req, res, next) {
+  res.header(
+    "Access-Control-Allow-Methods",
+    "OPTIONS, HEAD, GET, PUT, POST, DELETE"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+app.use(morgan("tiny"));
+app.use(express.static("./server/assets"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use("/", express.static(__dirname + "/"));
+app.use(
+  cors({
+    origin: "https://suoni-archive-9oam-lcc7e824r-robfeulner-s-team.vercel.app",
   })
-  .use(morgan("tiny"))
-  .use(express.static("./server/assets"))
-  .use(express.json())
-  .use(express.urlencoded({ extended: false }))
-  .use("/", express.static(__dirname + "/"))
-  .use(
-    cors({
-      origin: "https://suoni-archive-server.vercel.app",
-    })
-  )
-  .use(helmet());
+);
+app.use(helmet());
 
 app.get("/test", (req, res) => {
   res.status(200).json({ itWorked: true });
