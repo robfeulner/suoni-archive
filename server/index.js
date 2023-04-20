@@ -3,7 +3,9 @@
 // import the needed node_modules.
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 // const port = 8888;
+const port = process.env.PORT || 8888;
 
 const app = express();
 
@@ -46,4 +48,8 @@ app.get("*", (req, res) => {
 });
 
 // Node spins up our server and sets it to listen on our port #.
-app.listen(process.env.PORT || 8888, () => console.log(`Listening on port`));
+app.listen(port, () => console.info(`Listening on port ${port}`));
+
+// app.listen(process.env.PORT || 8888, () =>
+//   console.log(`Listening on port ${port}`)
+// );
