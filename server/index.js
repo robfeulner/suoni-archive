@@ -59,9 +59,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/", express.static(__dirname + "/"));
 app.use(
   cors({
-    origin: "https://suoni-archive-9oam-lcc7e824r-robfeulner-s-team.vercel.app",
+    origin: "https://suoni-archive-9oam.vercel.app/",
   })
 );
+// app.use(cors());
 app.use(helmet());
 
 app.get("/test", (req, res) => {

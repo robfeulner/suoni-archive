@@ -636,13 +636,6 @@ const events = [
       },
       {
         _id: uuidv4(),
-        artist: ["Phil Niblock", "Tim Hecker", "Katherine Liberovskaya"],
-        date: "2007-06-12",
-        venue: "La Sala Rossa",
-        price: "$10 adv / $12 door",
-      },
-      {
-        _id: uuidv4(),
         artist: [`The Ex`, `Rhythm Activism`],
         date: "2007-06-21",
         venue: "La Sala Rossa",
